@@ -66,18 +66,20 @@ class _SplashScreenState extends State<SplashScreen> {
           if(Provider.of<SplashProvider>(context, listen: false).configModel.maintenanceMode) {
             Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => MaintenanceScreen()));
           }else {
-            if (Provider.of<AuthProvider>(context, listen: false).isLoggedIn()) {
-              Provider.of<AuthProvider>(context, listen: false).updateToken(context);
-              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => DashBoardScreen()));
-            } else {
-              if(Provider.of<SplashProvider>(context, listen: false).showIntro()) {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => OnBoardingScreen(
-                  indicatorColor: ColorResources.GREY, selectedIndicatorColor: Theme.of(context).primaryColor,
-                )));
-              }else {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => AuthScreen()));
-              }
-            }
+            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => DashBoardScreen()));
+
+            // if (Provider.of<AuthProvider>(context, listen: false).isLoggedIn()) {
+            //   Provider.of<AuthProvider>(context, listen: false).updateToken(context);
+            //   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => DashBoardScreen()));
+            // } else {
+            //   if(Provider.of<SplashProvider>(context, listen: false).showIntro()) {
+            //     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => OnBoardingScreen(
+            //       indicatorColor: ColorResources.GREY, selectedIndicatorColor: Theme.of(context).primaryColor,
+            //     )));
+            //   }else {
+            //     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => AuthScreen()));
+            //   }
+            // }
           }
         });
       }
