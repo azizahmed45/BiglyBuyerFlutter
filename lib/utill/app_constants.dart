@@ -3,7 +3,7 @@ import 'package:bigly24/data/model/response/language_model.dart';
 class AppConstants {
   static const String APP_NAME = '6valley';
 
-  static const String BASE_URL = 'https://demo.6amtech.com/6valley/';
+  static const String BASE_URL = 'https://api.bigly24.com/';
   static const String USER_ID = 'userId';
   static const String NAME = 'name';
   static const String CATEGORIES_URI = 'api/v1/categories';
@@ -18,6 +18,8 @@ class AppConstants {
   static const String BEST_SELLING_PRODUCTS_URI = 'api/v1/products/best-sellings?limit=1&offset=';
   static const String FEATURED_PRODUCTS_URI = 'api/v1/products/featured?limit=10&&offset=';
   static const String HOME_CATEGORY_PRODUCTS_URI = 'api/v1/products/home-categories';
+
+  static const String PRODUCTS_URL = 'api/products';
 
   static const String PRODUCT_DETAILS_URI = 'api/v1/products/details/';
   static const String PRODUCT_REVIEW_URI = 'api/v1/products/reviews/';

@@ -1,3 +1,4 @@
+
 class ProductModel {
   int _totalSize;
   int _limit;
@@ -21,9 +22,9 @@ class ProductModel {
     _totalSize = json['total_size'];
     _limit = json['limit'];
     _offset = json['offset'];
-    if (json['products'] != null) {
+    if (json['data'] != null) {
       _products = [];
-      json['products'].forEach((v) {_products.add(new Product.fromJson(v));
+      json['data'].forEach((v) {_products.add(new Product.fromJson(v));
       });
     }
   }
@@ -34,7 +35,7 @@ class ProductModel {
     data['limit'] = this._limit;
     data['offset'] = this._offset;
     if (this._products != null) {
-      data['products'] = this._products.map((v) => v.toJson()).toList();
+      data['data'] = this._products.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -149,7 +150,7 @@ class Product {
     _id = json['id'];
     _addedBy = json['added_by'];
     _userId = json['user_id'];
-    _name = json['name'];
+    _name = json['title'];
     if (json['category_ids'] != null) {
       _categoryIds = [];
       json['category_ids'].forEach((v) {
@@ -159,7 +160,7 @@ class Product {
     _unit = json['unit'];
     _minQty = json['min_qty'];
     _images = json['images'] != null ? json['images'].cast<String>() : [];
-    _thumbnail = json['thumbnail'];
+    _thumbnail = json['thumbnail']['url'];
     if (json['colors'] != null) {
       _colors = [];
       json['colors'].forEach((v) {
@@ -213,7 +214,7 @@ class Product {
     data['id'] = this._id;
     data['added_by'] = this._addedBy;
     data['user_id'] = this._userId;
-    data['name'] = this._name;
+    data['title'] = this._name;
     if (this._categoryIds != null) {
       data['category_ids'] = this._categoryIds.map((v) => v.toJson()).toList();
     }

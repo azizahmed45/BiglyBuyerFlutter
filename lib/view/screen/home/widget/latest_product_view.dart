@@ -38,7 +38,7 @@ class LatestProductView extends StatelessWidget {
     return Consumer<ProductProvider>(
       builder: (context, prodProvider, child) {
         List<Product> productList;
-        productList = prodProvider.lProductList;
+        productList = prodProvider.latestProductList;
 
         return Column(children: [
 

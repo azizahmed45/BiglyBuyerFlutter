@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 class PriceConverter {
   static String convertPrice(BuildContext context, double price, {double discount, String discountType}) {
+    return "99";
     if(discount != null && discountType != null){
       if(discountType == 'amount' || discountType == 'flat') {
         price = price - discount;

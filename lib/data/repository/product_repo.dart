@@ -10,33 +10,10 @@ class ProductRepo {
   final DioClient dioClient;
   ProductRepo({@required this.dioClient});
 
-  Future<ApiResponse> getLatestProductList(String offset, String languageCode, ProductType productType, String title) async {
-    String endUrl;
-    // if(productType == ProductType.LATEST_PRODUCT){
-    //   endUrl = AppConstants.LATEST_PRODUCTS_URI;
-    //   title = 'Latest Product';
-    // }
-    // else if(productType == ProductType.FEATURED_PRODUCT){
-    //   endUrl = AppConstants.FEATURED_PRODUCTS_URI;
-    //   title = 'Featured Product';
-    // }
-     if(productType == ProductType.BEST_SELLING){
-      endUrl = AppConstants.BEST_SELLING_PRODUCTS_URI;
-      title = 'Best Selling Product';
-    }
-    else if(productType == ProductType.NEW_ARRIVAL){
-      endUrl = AppConstants.NEW_ARRIVAL_PRODUCTS_URI;
-      title = 'New Arrival Product';
-    }
-    else if(productType == ProductType.TOP_PRODUCT){
-      endUrl = AppConstants.TOP_PRODUCTS_URI;
-      title = 'Top Product';
-    }
-
+  Future<ApiResponse> getLatestProductList(String offset) async {
     try {
       final response = await dioClient.get(
-        endUrl+offset,
-        options: Options(headers: {AppConstants.LANG_KEY: languageCode}),
+        '${AppConstants.PRODUCTS_URL}?page=$offset',
       );
       return ApiResponse.withSuccess(response);
     } catch (e) {

@@ -43,7 +43,7 @@ class ProductWidget extends StatelessWidget {
               ),
               child: FadeInImage.assetNetwork(
                 placeholder: Images.placeholder, fit: BoxFit.cover,
-                image: '${Provider.of<SplashProvider>(context, listen: false).baseUrls.productThumbnailUrl}/${productModel.thumbnail}',
+                image: '${productModel.thumbnail}',
                 imageErrorBuilder: (c, o, s) => Image.asset(Images.placeholder, fit: BoxFit.cover),
               ),
             ),
@@ -83,7 +83,7 @@ class ProductWidget extends StatelessWidget {
                     SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
 
 
-                    productModel.discount > 0 && productModel.discount!= null  ? Text(
+                  productModel.discount != null && productModel.discount > 0  ? Text(
                       PriceConverter.convertPrice(context, productModel.unitPrice),
                       style: robotoBold.copyWith(
                         color: Theme.of(context).hintColor,
@@ -102,7 +102,7 @@ class ProductWidget extends StatelessWidget {
 
           // Off
 
-          productModel.discount >= 1 ? Positioned(
+          productModel.discount != null && productModel.discount >= 1 ? Positioned(
             top: 0,
             right: 0,
             child: Container(

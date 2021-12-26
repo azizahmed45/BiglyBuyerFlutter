@@ -64,7 +64,7 @@ class ProductDetailsProvider extends ChangeNotifier {
     _variantIndex = 0;
     _quantity = 1;
     _variationIndex = [];
-    product.choiceOptions.forEach((element) => _variationIndex.add(0));
+    // product.choiceOptions.forEach((element) => _variationIndex.add(0));
   }
 
   void removePrevReview() {
