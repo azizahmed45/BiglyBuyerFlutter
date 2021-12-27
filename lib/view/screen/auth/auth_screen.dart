@@ -63,7 +63,7 @@ class AuthScreen extends StatelessWidget{
                           builder: (context,authProvider,child)=>Row(
                             children: [
                               InkWell(
-                                onTap: () => _pageController.animateToPage(0, duration: Duration(seconds: 1), curve: Curves.easeInOut),
+                                onTap: () => _pageController.animateToPage(0, duration: Duration(milliseconds: 500), curve: Curves.easeInOut),
                                 child: Column(
                                   children: [
                                     Text(getTranslated('SIGN_IN', context), style: authProvider.selectedIndex == 0 ? titilliumSemiBold : titilliumRegular),
@@ -78,7 +78,7 @@ class AuthScreen extends StatelessWidget{
                               ),
                               SizedBox(width: 25),
                               InkWell(
-                                onTap: () => _pageController.animateToPage(1, duration: Duration(seconds: 1), curve: Curves.easeInOut),
+                                onTap: () => _pageController.animateToPage(1, duration: Duration(milliseconds: 500), curve: Curves.easeInOut),
                                 child: Column(
                                   children: [
                                     Text(getTranslated('SIGN_UP', context), style: authProvider.selectedIndex == 1 ? titilliumSemiBold : titilliumRegular),

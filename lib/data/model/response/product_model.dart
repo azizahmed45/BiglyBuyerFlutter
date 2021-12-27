@@ -182,8 +182,8 @@ class Product {
         _variation.add(new Variation.fromJson(v));
       });
     }
-    if(json['unit_price'] != null){
-      _unitPrice = json['unit_price'].toDouble();
+    if(json['price'] != null){
+      _unitPrice = double.parse(json['price']);
     }
     if(json['purchase_price']!=null){
       _purchasePrice = json['purchase_price'].toDouble();
@@ -233,7 +233,7 @@ class Product {
     if (this._variation != null) {
       data['variation'] = this._variation.map((v) => v.toJson()).toList();
     }
-    data['unit_price'] = this._unitPrice;
+    data['price'] = this._unitPrice;
     data['purchase_price'] = this._purchasePrice;
     data['tax'] = this._tax;
     data['tax_type'] = this._taxType;

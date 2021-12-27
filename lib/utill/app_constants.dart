@@ -11,7 +11,7 @@ class AppConstants {
   static const String BRAND_PRODUCT_URI = 'api/v1/brands/products/';
   static const String CATEGORY_PRODUCT_URI = 'api/v1/categories/products/';
   static const String REGISTRATION_URI = 'api/v1/auth/register';
-  static const String LOGIN_URI = 'api/v1/auth/login';
+  static const String LOGIN_URI = 'api/buyer/login';
   static const String LATEST_PRODUCTS_URI = 'api/v1/products/latest?limit=10&&offset=';
   static const String NEW_ARRIVAL_PRODUCTS_URI = 'api/v1/products/latest?limit=10&&offset=';
   static const String TOP_PRODUCTS_URI = 'api/v1/products/top-rated?limit=10&&offset=';
@@ -23,7 +23,7 @@ class AppConstants {
 
   static const String PRODUCT_DETAILS_URI = 'api/v1/products/details/';
   static const String PRODUCT_REVIEW_URI = 'api/v1/products/reviews/';
-  static const String SEARCH_URI = 'api/v1/products/search?name=';
+  static const String SEARCH_URI = 'api/searchProduct?title_contains=';
   static const String CONFIG_URI = 'api/v1/config';
   static const String ADD_WISH_LIST_URI = 'api/v1/customer/wish-list/add?product_id=';
   static const String REMOVE_WISH_LIST_URI = 'api/v1/customer/wish-list/remove?product_id=';

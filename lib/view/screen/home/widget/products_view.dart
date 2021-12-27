@@ -23,25 +23,34 @@ class ProductView extends StatelessWidget {
       if(scrollController.position.maxScrollExtent == scrollController.position.pixels
           && Provider.of<ProductProvider>(context, listen: false).latestProductList.length != 0
           && !Provider.of<ProductProvider>(context, listen: false).filterIsLoading) {
-        int pageSize;
-        if(productType == ProductType.BEST_SELLING || productType == ProductType.TOP_PRODUCT || productType == ProductType.NEW_ARRIVAL ) {
-          pageSize = Provider.of<ProductProvider>(context, listen: false).latestPageSize;
-        }
+        // int pageSize;
+        // if(productType == ProductType.BEST_SELLING || productType == ProductType.TOP_PRODUCT || productType == ProductType.NEW_ARRIVAL ) {
+        //   pageSize = Provider.of<ProductProvider>(context, listen: false).latestPageSize;
+        // }
+        //
+        // else if(productType == ProductType.SELLER_PRODUCT) {
+        //   pageSize = Provider.of<ProductProvider>(context, listen: false).sellerPageSize;
+        // }
+        // if(offset < pageSize) {
+        //   offset++;
+        //   print('end of the page');
+        //   Provider.of<ProductProvider>(context, listen: false).showBottomLoader();
+        //
+        //   Provider.of<ProductProvider>(context, listen: false).getLatestProductList(
+        //     offset.toString(), context, Provider.of<LocalizationProvider>(context, listen: false).locale.languageCode,
+        //   );
+        //
+        //
+        // }
 
-        else if(productType == ProductType.SELLER_PRODUCT) {
-          pageSize = Provider.of<ProductProvider>(context, listen: false).sellerPageSize;
-        }
-        if(offset < pageSize) {
           offset++;
-          print('end of the page');
+
           Provider.of<ProductProvider>(context, listen: false).showBottomLoader();
 
           Provider.of<ProductProvider>(context, listen: false).getLatestProductList(
             offset.toString(), context, Provider.of<LocalizationProvider>(context, listen: false).locale.languageCode,
           );
-
-
-        }
+        print("emd of the page");
       }
 
     });
@@ -49,23 +58,25 @@ class ProductView extends StatelessWidget {
     return Consumer<ProductProvider>(
       builder: (context, prodProvider, child) {
         List<Product> productList = [];
-        if(productType == ProductType.LATEST_PRODUCT) {
-          productList = prodProvider.lProductList;
-        }
-        else if(productType == ProductType.FEATURED_PRODUCT) {
-          productList = prodProvider.featuredProductList;
-        }else if(productType == ProductType.TOP_PRODUCT) {
-          productList = prodProvider.latestProductList;
-          print('===============>${productList.length}');
-        }else if(productType == ProductType.BEST_SELLING) {
-          productList = prodProvider.latestProductList;
-        }else if(productType == ProductType.NEW_ARRIVAL) {
-          productList = prodProvider.latestProductList;
-        }
+        // if(productType == ProductType.LATEST_PRODUCT) {
+        //   productList = prodProvider.lProductList;
+        // }
+        // else if(productType == ProductType.FEATURED_PRODUCT) {
+        //   productList = prodProvider.featuredProductList;
+        // }else if(productType == ProductType.TOP_PRODUCT) {
+        //   productList = prodProvider.latestProductList;
+        //   print('===============>${productList.length}');
+        // }else if(productType == ProductType.BEST_SELLING) {
+        //   productList = prodProvider.latestProductList;
+        // }else if(productType == ProductType.NEW_ARRIVAL) {
+        //   productList = prodProvider.latestProductList;
+        // }
+        //
+        // else if(productType == ProductType.SELLER_PRODUCT) {
+        //   productList = prodProvider.sellerProductList;
+        // }
 
-        else if(productType == ProductType.SELLER_PRODUCT) {
-          productList = prodProvider.sellerProductList;
-        }
+        productList = prodProvider.latestProductList;
 
         return Column(children: [
 
@@ -84,7 +95,7 @@ class ProductView extends StatelessWidget {
             },
           ): SizedBox.shrink() : ProductShimmer(isHomePage: isHomePage ,isEnabled: prodProvider.firstLoading),
 
-          prodProvider.filterIsLoading ? Center(child: Padding(
+          prodProvider.filterIsLoading || prodProvider.isLoading ? Center(child: Padding(
             padding: EdgeInsets.all(Dimensions.ICON_SIZE_EXTRA_SMALL),
             child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor)),
           )) : SizedBox.shrink(),

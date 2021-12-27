@@ -36,7 +36,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       InboxScreen(isBackButtonExist: false),
       OrderScreen(isBacButtonExist: false),
       NotificationScreen(isBacButtonExist: false),
-      MoreScreen(),
+      // MoreScreen(),
     ];
 
     NetworkInfo.checkConnectivity(context);
@@ -66,7 +66,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
             FancyTabData(imagePath: Images.message_image, title: getTranslated('inbox', context)),
             FancyTabData(imagePath:Images.shopping_image, title: getTranslated('orders', context)),
             FancyTabData(imagePath: Images.notification, title: getTranslated('notification', context)),
-            FancyTabData(imagePath: Images.more_image, title: getTranslated('more', context)),
+            // FancyTabData(imagePath: Images.more_image, title: getTranslated('more', context)),
           ],
           onTabChangedListener: (int index) {
             _pageController.jumpToPage(index);

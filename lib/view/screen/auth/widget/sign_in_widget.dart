@@ -166,7 +166,7 @@ class _SignInWidgetState extends State<SignInWidget> {
 
           SizedBox(width: 25),
 
-          SocialLoginWidget(),
+          // SocialLoginWidget(),
 
           SizedBox(height: 20),
           Center(child: Text(getTranslated('OR', context), style: titilliumRegular.copyWith(fontSize: 12))),

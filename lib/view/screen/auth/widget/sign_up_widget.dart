@@ -277,7 +277,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
               : CustomButton(onTap: addUser, buttonText: getTranslated('SIGN_UP', context)),
         ),
 
-        SocialLoginWidget(),
+        // SocialLoginWidget(),
 
         // for skip for now
         Provider.of<AuthProvider>(context).isLoading
