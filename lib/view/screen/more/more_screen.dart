@@ -117,22 +117,22 @@ class MoreScreen extends StatelessWidget {
 
               // Buttons
               TitleButton(image: Images.fast_delivery, title: getTranslated('address', context), navigateTo: AddressListScreen()),
-              TitleButton(image: Images.more_filled_image, title: getTranslated('all_category', context), navigateTo: AllCategoryScreen()),
+              // TitleButton(image: Images.more_filled_image, title: getTranslated('all_category', context), navigateTo: AllCategoryScreen()),
               TitleButton(image: Images.notification_filled, title: getTranslated('notification', context), navigateTo: NotificationScreen()),
               //TODO: seller
               TitleButton(image: Images.chats, title: getTranslated('chats', context), navigateTo: InboxScreen()),
               TitleButton(image: Images.settings, title: getTranslated('settings', context), navigateTo: SettingsScreen()),
-              TitleButton(image: Images.preference, title: getTranslated('support_ticket', context), navigateTo: SupportTicketScreen()),
-              TitleButton(image: Images.privacy_policy, title: getTranslated('terms_condition', context), navigateTo: HtmlViewScreen(
+              // TitleButton(image: Images.preference, title: getTranslated('support_ticket', context), navigateTo: SupportTicketScreen()),
+              TitleButton(image: Images.privacy_policy, title: getTranslated('terms_condition', context), navigateTo: WebViewScreen(
                 title: getTranslated('terms_condition', context),
                 url: Provider.of<SplashProvider>(context, listen: false).configModel.termsConditions,
               )),
-              TitleButton(image: Images.help_center, title: getTranslated('faq', context), navigateTo: FaqScreen(
+              TitleButton(image: Images.help_center, title: getTranslated('faq', context), navigateTo: WebViewScreen(
                 title: getTranslated('faq', context),
-                // url: Provider.of<SplashProvider>(context, listen: false).configModel.staticUrls.faq,
+                url: Provider.of<SplashProvider>(context, listen: false).configModel.termsConditions,
               )),
 
-              TitleButton(image: Images.about_us, title: getTranslated('about_us', context), navigateTo: HtmlViewScreen(
+              TitleButton(image: Images.about_us, title: getTranslated('about_us', context), navigateTo: WebViewScreen(
                 title: getTranslated('about_us', context),
                 url: Provider.of<SplashProvider>(context, listen: false).configModel.aboutUs,
               )),

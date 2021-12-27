@@ -47,7 +47,7 @@ class AppInfoDialog extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(getTranslated('RELEASE_DATE', context), style: titilliumRegular),
-                Text('01 Jan 2021', style: titilliumSemiBold.copyWith(fontSize: Dimensions.FONT_SIZE_LARGE)),
+                Text('27 Dec 2021', style: titilliumSemiBold.copyWith(fontSize: Dimensions.FONT_SIZE_LARGE)),
               ],
             ),
           ],

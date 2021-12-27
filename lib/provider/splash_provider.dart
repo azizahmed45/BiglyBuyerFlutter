@@ -7,6 +7,7 @@ import 'package:package_info/package_info.dart';
 
 class SplashProvider extends ChangeNotifier {
   final SplashRepo splashRepo;
+
   SplashProvider({@required this.splashRepo});
 
   ConfigModel _configModel;
@@ -21,21 +22,36 @@ class SplashProvider extends ChangeNotifier {
   bool _firstTimeConnectionCheck = true;
 
   ConfigModel get configModel => _configModel;
+
   BaseUrls get baseUrls => _baseUrls;
+
   CurrencyList get myCurrency => _myCurrency;
+
   CurrencyList get usdCurrency => _usdCurrency;
+
   CurrencyList get defaultCurrency => _defaultCurrency;
+
   int get currencyIndex => _currencyIndex;
+
   PackageInfo get packageInfo => _packageInfo;
+
   bool get hasConnection => _hasConnection;
+
   bool get fromSetting => _fromSetting;
+
   bool get firstTimeConnectionCheck => _firstTimeConnectionCheck;
 
   Future<bool> initConfig(BuildContext context) async {
     _hasConnection = true;
     bool isSuccess = true;
 
-    _configModel = ConfigModel(maintenanceMode: false);
+    _configModel = ConfigModel(
+        maintenanceMode: false,
+        staticUrls: StaticUrls(contactUs: 'https://bigly24.com/page/contact-us'),
+        aboutUs: 'https://bigly24.com/page/about-us',
+        termsConditions: "https://bigly24.com/page/about-us");
+
+    _packageInfo = await PackageInfo.fromPlatform();
 
     // ApiResponse apiResponse = await splashRepo.getConfig();
     // bool isSuccess;
@@ -74,7 +90,7 @@ class SplashProvider extends ChangeNotifier {
 
   void getCurrencyData(String currencyCode) {
     _configModel.currencyList.forEach((currency) {
-      if(currencyCode == currency.code) {
+      if (currencyCode == currency.code) {
         _myCurrency = currency;
         _currencyIndex = _configModel.currencyList.indexOf(currency);
         return;
@@ -103,6 +119,4 @@ class SplashProvider extends ChangeNotifier {
   void disableIntro() {
     splashRepo.disableIntro();
   }
-
-
 }
