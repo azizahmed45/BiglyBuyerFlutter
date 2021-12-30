@@ -159,7 +159,17 @@ class Product {
     }
     _unit = json['unit'];
     _minQty = json['min_qty'];
-    _images = json['images'] != null ? json['images'].cast<String>() : [];
+    // _images = json['images'] != null ? json['images'].cast<String>() : [];
+
+    if(json['images'] != null){
+      _images = [];
+      json['images'].forEach((v){
+        _images.add(v['url']);
+      });
+    } else {
+      _images = [];
+    }
+
     _thumbnail = json['thumbnail']['url'];
     if (json['colors'] != null) {
       _colors = [];

@@ -42,7 +42,7 @@ class _ProductImageScreenState extends State<ProductImageScreen> {
                 scrollPhysics: const BouncingScrollPhysics(),
                 builder: (BuildContext context, int index) {
                   return PhotoViewGalleryPageOptions(
-                    imageProvider: NetworkImage('${Provider.of<SplashProvider>(context,listen: false).baseUrls.productImageUrl}/${widget.imageList[index]}'),
+                    imageProvider: NetworkImage(widget.imageList[index]),
                     initialScale: PhotoViewComputedScale.contained,
                     heroAttributes: PhotoViewHeroAttributes(tag: index.toString()),
                   );

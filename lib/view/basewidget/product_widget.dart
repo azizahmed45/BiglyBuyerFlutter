@@ -1,3 +1,7 @@
+import 'dart:ui';
+
+import 'package:bigly24/provider/auth_provider.dart';
+import 'package:bigly24/view/basewidget/blur_price_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:bigly24/data/model/response/product_model.dart';
 import 'package:bigly24/helper/price_converter.dart';
@@ -12,24 +16,35 @@ import 'package:provider/provider.dart';
 
 class ProductWidget extends StatelessWidget {
   final Product productModel;
+
   ProductWidget({@required this.productModel});
 
   @override
   Widget build(BuildContext context) {
+    bool isGuestMode = !Provider.of<AuthProvider>(context, listen: false).isLoggedIn();
+
 
     return InkWell(
       onTap: () {
-        Navigator.push(context, PageRouteBuilder(
-          transitionDuration: Duration(milliseconds: 1000),
-          pageBuilder: (context, anim1, anim2) => ProductDetails(product: productModel),
-        ));
+        Navigator.push(
+            context,
+            PageRouteBuilder(
+              transitionDuration: Duration(milliseconds: 1000),
+              pageBuilder: (context, anim1, anim2) =>
+                  ProductDetails(product: productModel),
+            ));
       },
       child: Container(
         margin: EdgeInsets.all(5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Theme.of(context).highlightColor,
-          boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.2), spreadRadius: 1, blurRadius: 5)],
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey.withOpacity(0.2),
+                spreadRadius: 1,
+                blurRadius: 5)
+          ],
         ),
         child: Stack(children: [
           Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
@@ -39,12 +54,16 @@ class ProductWidget extends StatelessWidget {
               padding: EdgeInsets.all(Dimensions.PADDING_SIZE_LARGE),
               decoration: BoxDecoration(
                 color: ColorResources.getIconBg(context),
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10)),
               ),
               child: FadeInImage.assetNetwork(
-                placeholder: Images.placeholder, fit: BoxFit.cover,
+                placeholder: Images.placeholder,
+                fit: BoxFit.cover,
                 image: '${productModel.thumbnail}',
-                imageErrorBuilder: (c, o, s) => Image.asset(Images.placeholder, fit: BoxFit.cover),
+                imageErrorBuilder: (c, o, s) =>
+                    Image.asset(Images.placeholder, fit: BoxFit.cover),
               ),
             ),
 
@@ -57,43 +76,58 @@ class ProductWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-
-                    Text(productModel.name ?? '', style: robotoRegular, maxLines: 1, overflow: TextOverflow.ellipsis),
+                    Text(productModel.name ?? '',
+                        style: robotoRegular,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis),
                     SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-
                     Row(children: [
-
+                      isGuestMode ?
+                      BlurPrice(
+                          text: PriceConverter.convertPrice(
+                              context, productModel.unitPrice ?? 0.0,
+                              discountType: productModel.discountType,
+                              discount: productModel.discount)):
                       Text(
-                        PriceConverter.convertPrice(context, productModel.unitPrice ?? 0.0, discountType: productModel.discountType, discount: productModel.discount),
-                        style: robotoBold.copyWith(color: ColorResources.getPrimary(context)),
-                      ),
-
+                          PriceConverter.convertPrice(
+                            context, productModel.unitPrice ?? 0.0,
+                            discountType: productModel.discountType),
+                        style: robotoBold.copyWith(
+                            color: ColorResources.getPrimary(context)),
+                      )
+                      ,
                       Expanded(child: SizedBox.shrink()),
-
-
-                      Text(productModel.rating != null ? productModel.rating.length != 0 ? double.parse(productModel.rating[0].average).toStringAsFixed(1) : '0.0' : '0.0',
+                      Text(
+                          productModel.rating != null
+                              ? productModel.rating.length != 0
+                                  ? double.parse(productModel.rating[0].average)
+                                      .toStringAsFixed(1)
+                                  : '0.0'
+                              : '0.0',
                           style: robotoRegular.copyWith(
-                            color: Provider.of<ThemeProvider>(context).darkTheme ? Colors.white : Colors.orange,
+                            color: Provider.of<ThemeProvider>(context).darkTheme
+                                ? Colors.white
+                                : Colors.orange,
                             fontSize: Dimensions.FONT_SIZE_SMALL,
                           )),
-
-
-                      Icon(Icons.star, color: Provider.of<ThemeProvider>(context).darkTheme ? Colors.white : Colors.orange, size: 15),
+                      Icon(Icons.star,
+                          color: Provider.of<ThemeProvider>(context).darkTheme
+                              ? Colors.white
+                              : Colors.orange,
+                          size: 15),
                     ]),
                     SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-
-
-                  productModel.discount != null && productModel.discount > 0  ? Text(
-                      PriceConverter.convertPrice(context, productModel.unitPrice),
-                      style: robotoBold.copyWith(
-                        color: Theme.of(context).hintColor,
-                        decoration: TextDecoration.lineThrough,
-                        fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL,
-                      ),
-                    ) : SizedBox.shrink(),
-
-
-
+                    productModel.discount != null && productModel.discount > 0
+                        ? Text(
+                            PriceConverter.convertPrice(
+                                context, productModel.unitPrice),
+                            style: robotoBold.copyWith(
+                              color: Theme.of(context).hintColor,
+                              decoration: TextDecoration.lineThrough,
+                              fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL,
+                            ),
+                          )
+                        : SizedBox.shrink(),
                   ],
                 ),
               ),
@@ -102,25 +136,35 @@ class ProductWidget extends StatelessWidget {
 
           // Off
 
-          productModel.discount != null && productModel.discount >= 1 ? Positioned(
-            top: 0,
-            right: 0,
-            child: Container(
-              height: 20,
-              padding: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-              decoration: BoxDecoration(
-                color: ColorResources.getPrimary(context),
-                borderRadius: BorderRadius.only(topRight: Radius.circular(10), bottomLeft: Radius.circular(10)),
-              ),
-              child: Center(
-                child: Text(
-                  PriceConverter.percentageCalculation(context, productModel.unitPrice, productModel.discount, productModel.discountType),
-                  style: robotoRegular.copyWith(color: Theme.of(context).highlightColor, fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL),
-                ),
-              ),
-            ),
-          ) : SizedBox.shrink(),
-
+          productModel.discount != null && productModel.discount >= 1
+              ? Positioned(
+                  top: 0,
+                  right: 0,
+                  child: Container(
+                    height: 20,
+                    padding: EdgeInsets.symmetric(
+                        horizontal: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                    decoration: BoxDecoration(
+                      color: ColorResources.getPrimary(context),
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10)),
+                    ),
+                    child: Center(
+                      child: Text(
+                        PriceConverter.percentageCalculation(
+                            context,
+                            productModel.unitPrice,
+                            productModel.discount,
+                            productModel.discountType),
+                        style: robotoRegular.copyWith(
+                            color: Theme.of(context).highlightColor,
+                            fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL),
+                      ),
+                    ),
+                  ),
+                )
+              : SizedBox.shrink(),
         ]),
       ),
     );

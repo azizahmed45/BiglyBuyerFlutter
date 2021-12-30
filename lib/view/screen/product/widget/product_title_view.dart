@@ -1,3 +1,5 @@
+import 'package:bigly24/provider/auth_provider.dart';
+import 'package:bigly24/view/basewidget/blur_price_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:bigly24/data/model/response/product_model.dart';
 import 'package:bigly24/helper/price_converter.dart';
@@ -18,19 +20,21 @@ class ProductTitleView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    double _startingPrice;
-    double _endingPrice;
-    if(productModel.variation.length != 0) {
-      List<double> _priceList = [];
-      productModel.variation.forEach((variation) => _priceList.add(variation.price));
-      _priceList.sort((a, b) => a.compareTo(b));
-      _startingPrice = _priceList[0];
-      if(_priceList[0] < _priceList[_priceList.length-1]) {
-        _endingPrice = _priceList[_priceList.length-1];
-      }
-    }else {
-      _startingPrice = productModel.unitPrice;
-    }
+    // double _startingPrice;
+    // double _endingPrice;
+    // if(productModel.variation.length != 0) {
+    //   List<double> _priceList = [];
+    //   productModel.variation.forEach((variation) => _priceList.add(variation.price));
+    //   _priceList.sort((a, b) => a.compareTo(b));
+    //   _startingPrice = _priceList[0];
+    //   if(_priceList[0] < _priceList[_priceList.length-1]) {
+    //     _endingPrice = _priceList[_priceList.length-1];
+    //   }
+    // }else {
+    //   _startingPrice = productModel.unitPrice;
+    // }
+
+    bool isGuestMode = !Provider.of<AuthProvider>(context, listen: false).isLoggedIn();
 
     return Container(
       color: Theme.of(context).highlightColor,
@@ -40,15 +44,14 @@ class ProductTitleView extends StatelessWidget {
           return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
 
             Row(children: [
-
-              Text(
-                '${PriceConverter.convertPrice(context, _startingPrice, discount: productModel.discount, discountType: productModel.discountType)}'
-                    '${_endingPrice!= null ? ' - ${PriceConverter.convertPrice(context, _endingPrice, discount: productModel.discount, discountType: productModel.discountType)}' : ''}',
+              isGuestMode ?
+                  BlurPrice(text: "\$ 0.00") :
+              Text('\$ ${productModel.unitPrice.toString()}',
                 style: titilliumBold.copyWith(color: ColorResources.getPrimary(context), fontSize: Dimensions.FONT_SIZE_LARGE),
               ),
               SizedBox(width: 20),
 
-              productModel.discount > 0 ? Container(
+              productModel.discount != null && productModel.discount > 0 ? Container(
                 width: 50,
                 height: 20,
                 alignment: Alignment.center,
@@ -82,10 +85,7 @@ class ProductTitleView extends StatelessWidget {
 
             ]),
 
-            productModel.discount > 0 ?Text(
-
-              '${PriceConverter.convertPrice(context, _startingPrice)}'
-                  '${_endingPrice!= null ? ' - ${PriceConverter.convertPrice(context, _endingPrice)}' : ''}',
+            productModel.discount != null && productModel.discount > 0 ?Text(productModel.unitPrice.toString(),
               style: titilliumRegular.copyWith(color: Theme.of(context).hintColor, decoration: TextDecoration.lineThrough),
             ):SizedBox(),
 

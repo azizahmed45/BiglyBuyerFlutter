@@ -46,7 +46,7 @@ class ProductImageView extends StatelessWidget {
                       padding: EdgeInsets.fromLTRB(20, 20, 20, 50),
                       child: FadeInImage.assetNetwork(
                         placeholder: Images.placeholder, height: MediaQuery.of(context).size.width, width: MediaQuery.of(context).size.width,
-                        image: '${Provider.of<SplashProvider>(context,listen: false).baseUrls.productImageUrl}/${productModel.images[index]}',
+                        image: productModel.images[index],
                         imageErrorBuilder: (c, o, s) => Image.asset(
                           Images.placeholder, height: MediaQuery.of(context).size.width, width: MediaQuery.of(context).size.width,
                         ),
@@ -110,7 +110,7 @@ class ProductImageView extends StatelessWidget {
                     padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
                     child: FadeInImage.assetNetwork(
                       placeholder: Images.placeholder,
-                      image: '${Provider.of<SplashProvider>(context,listen: false).baseUrls.productImageUrl}/${productModel.images[index]}',
+                      image: productModel.images[index],
                       imageErrorBuilder: (c, o, s) => Image.asset(Images.placeholder),
                     ),
                   ),

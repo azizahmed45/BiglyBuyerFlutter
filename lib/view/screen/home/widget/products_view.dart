@@ -50,7 +50,7 @@ class ProductView extends StatelessWidget {
           Provider.of<ProductProvider>(context, listen: false).getLatestProductList(
             offset.toString(), context, Provider.of<LocalizationProvider>(context, listen: false).locale.languageCode,
           );
-        print("emd of the page");
+        print("end of the page");
       }
 
     });
