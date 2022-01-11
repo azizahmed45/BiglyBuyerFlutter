@@ -87,25 +87,12 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
     ApiResponse apiResponse = await authRepo.registration(register);
     _isLoading = false;
-    if (apiResponse.response != null && apiResponse.response.statusCode == 200) {
+    if (apiResponse.response != null && apiResponse.response.statusCode == 201) {
       Map map = apiResponse.response.data;
-      String temporaryToken = '';
       String token = '';
-      String message = '';
-      try{
-        message = map["message"];
 
-      }catch(e){
-
-      }
       try{
         token = map["token"];
-
-      }catch(e){
-
-      }
-      try{
-        temporaryToken = map["temporary_token"];
 
       }catch(e){
 
@@ -114,7 +101,8 @@ class AuthProvider with ChangeNotifier {
         authRepo.saveUserToken(token);
         await authRepo.updateToken();
       }
-      callback(true, token, temporaryToken, message);
+      callback(true, "");
+
       notifyListeners();
     } else {
       String errorMessage;
@@ -126,7 +114,7 @@ class AuthProvider with ChangeNotifier {
         print(errorResponse.errors[0].message);
         errorMessage = errorResponse.errors[0].message;
       }
-      callback(false, '', '', errorMessage);
+      callback(false, errorMessage);
       notifyListeners();
     }
   }

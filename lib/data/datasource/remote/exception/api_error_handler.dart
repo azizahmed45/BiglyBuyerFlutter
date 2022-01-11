@@ -29,6 +29,9 @@ class ApiErrorHandler {
                 case 503:
                   errorDescription = error.response.statusMessage;
                   break;
+                case 422:
+                  errorDescription = FormError(error.response.data).firstErrorMessage;
+                  break;
                 default:
                   ErrorResponse errorResponse =
                   ErrorResponse.fromJson(error.response.data);

@@ -1,33 +1,34 @@
 class RegisterModel {
   String email;
   String password;
-  String fName;
-  String lName;
+  String name;
   String phone;
-  String socialId;
-  String loginMedium;
+  String companyName;
+  String address;
+  String country;
 
-  RegisterModel({this.email, this.password, this.fName, this.lName, this.socialId,this.loginMedium});
+  RegisterModel({this.email, this.password,this.name, this.phone,this.companyName, this.address, this.country});
 
   RegisterModel.fromJson(Map<String, dynamic> json) {
     email = json['email'];
     password = json['password'];
-    fName = json['f_name'];
-    lName = json['l_name'];
-    phone = json['phone'];
-    socialId = json['social_id'];
-    loginMedium = json['login_medium'];
+    name = json['name'];
+    phone = json['contact_number'];
+    companyName = json['company_name'];
+    country = json['country'];
+    address = json['address'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['email'] = this.email;
     data['password'] = this.password;
-    data['f_name'] = this.fName;
-    data['l_name'] = this.lName;
-    data['phone'] = this.phone;
-    data['social_id'] = this.socialId;
-    data['login_medium'] = this.loginMedium;
+    data['password_confirmation'] = this.password;
+    data['name'] = this.name;
+    data['contact_number'] = this.phone;
+    data['company_name'] = this.companyName;
+    data['address'] = this.address;
+    data['country'] = this.country;
     return data;
   }
 }

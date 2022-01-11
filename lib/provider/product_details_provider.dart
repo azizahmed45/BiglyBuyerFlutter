@@ -15,7 +15,7 @@ class ProductDetailsProvider extends ChangeNotifier {
   ProductDetailsProvider({@required this.productDetailsRepo});
 
   List<ReviewModel> _reviewList;
-  int _imageSliderIndex;
+  int _imageSliderIndex = 0;
   bool _wish = false;
   int _quantity = 0;
   int _variantIndex;
