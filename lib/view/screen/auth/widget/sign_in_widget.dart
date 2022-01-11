@@ -1,3 +1,5 @@
+import 'package:bigly24/provider/localization_provider.dart';
+import 'package:bigly24/provider/product_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:bigly24/data/model/body/login_model.dart';
 import 'package:bigly24/localization/language_constrants.dart';
@@ -82,6 +84,9 @@ class _SignInWidgetState extends State<SignInWidget> {
 
   route(bool isRoute, String errorMessage) async {
     if (isRoute) {
+      String _languageCode = Provider.of<LocalizationProvider>(context, listen: false).locale.languageCode;
+      await Provider.of<ProductProvider>(context, listen: false).getLatestProductList('1', context, _languageCode, reload: true);
+
       await Provider.of<ProfileProvider>(context, listen: false).getUserInfo(context);
       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_) => DashBoardScreen()), (route) => false);
     } else {

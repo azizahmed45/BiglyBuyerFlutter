@@ -119,6 +119,20 @@ class AuthRepo {
     }
   }
 
+  Future<void> removeAuthToken() async {
+    dioClient.token = null;
+    dioClient.dio.options.headers = {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer ${null}'
+    };
+
+    try {
+      await sharedPreferences.remove(AppConstants.TOKEN);
+    } catch (e) {
+      throw e;
+    }
+  }
+
   String getAuthToken() {
     return sharedPreferences.getString(AppConstants.TOKEN) ?? "";
   }
@@ -134,6 +148,8 @@ class AuthRepo {
     sharedPreferences.remove(AppConstants.TOKEN);
     sharedPreferences.remove(AppConstants.USER);
     FirebaseMessaging.instance.unsubscribeFromTopic(AppConstants.TOPIC);
+
+    removeAuthToken();
     return true;
   }
 

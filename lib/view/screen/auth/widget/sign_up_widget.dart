@@ -1,3 +1,5 @@
+import 'package:bigly24/provider/localization_provider.dart';
+import 'package:bigly24/provider/product_provider.dart';
 import 'package:country_code_picker/country_code.dart';
 import 'package:flutter/material.dart';
 import 'package:bigly24/data/model/body/register_model.dart';
@@ -180,6 +182,11 @@ class _SignUpWidgetState extends State<SignUpWidget> {
 
         await Provider.of<ProfileProvider>(context, listen: false)
             .getUserInfo(context);
+
+        //reload products
+        String _languageCode = Provider.of<LocalizationProvider>(context, listen: false).locale.languageCode;
+        await Provider.of<ProductProvider>(context, listen: false).getLatestProductList('1', context, _languageCode, reload: true);
+
         Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(builder: (_) => DashBoardScreen()),
