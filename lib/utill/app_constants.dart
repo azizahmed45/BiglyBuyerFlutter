@@ -36,7 +36,7 @@ class AppConstants {
   static const String SUPPORT_TICKET_URI = 'api/v1/customer/support-ticket/create';
   static const String MAIN_BANNER_URI = 'api/v1/banners?banner_type=main_banner';
   static const String FOOTER_BANNER_URI = 'api/v1/banners?banner_type=footer_banner';
-  static const String RELATED_PRODUCT_URI = 'api/v1/products/related-products/';
+  static const String RELATED_PRODUCT_URI = '/api/products/related-products/';
   static const String ORDER_URI = 'api/v1/customer/order/list';
   static const String ORDER_DETAILS_URI = 'api/v1/customer/order/details?order_id=';
   static const String ORDER_PLACE_URI = 'api/v1/customer/order/place';

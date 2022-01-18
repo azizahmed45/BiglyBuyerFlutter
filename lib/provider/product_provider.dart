@@ -252,8 +252,9 @@ class ProductProvider extends ChangeNotifier {
     if (apiResponse.response != null &&
         apiResponse.response.statusCode == 200) {
       _relatedProductList = [];
-      apiResponse.response.data.forEach((product) =>
-          _relatedProductList.add(Product.fromJson(product)));
+      _relatedProductList.addAll(ProductModel.fromJson(apiResponse.response.data).products);
+      // apiResponse.response.data.forEach((product) =>
+      //     _relatedProductList.add(Product.fromJson(product)));
     } else {
       ApiChecker.checkApi(context, apiResponse);
     }

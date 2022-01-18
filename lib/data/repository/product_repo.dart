@@ -54,7 +54,7 @@ class ProductRepo {
   Future<ApiResponse> getRelatedProductList(String id, String languageCode) async {
     try {
       final response = await dioClient.get(
-        AppConstants.RELATED_PRODUCT_URI+id, options: Options(headers: {AppConstants.LANG_KEY: languageCode}),
+        AppConstants.RELATED_PRODUCT_URI+id+'?total=10', options: Options(headers: {AppConstants.LANG_KEY: languageCode}),
       );
       return ApiResponse.withSuccess(response);
     } catch (e) {
