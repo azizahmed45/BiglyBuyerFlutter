@@ -48,7 +48,11 @@ class _HomePageState extends State<HomePage> {
   final ScrollController _scrollController = ScrollController();
 
   Future<void> _loadData(BuildContext context, bool reload) async {
-    String _languageCode = Provider.of<LocalizationProvider>(context, listen: false).locale.languageCode;
+    String _languageCode =
+        Provider.of<LocalizationProvider>(context, listen: false)
+            .locale
+            .languageCode;
+    Provider.of<BannerProvider>(context, listen: false).initBanner();
     // await Provider.of<BannerProvider>(context, listen: false).getBannerList(reload, context);
     // await Provider.of<BannerProvider>(context, listen: false).getFooterBannerList(context);
     // await Provider.of<CategoryProvider>(context, listen: false).getCategoryList(reload, context, _languageCode);
@@ -56,7 +60,8 @@ class _HomePageState extends State<HomePage> {
     // await Provider.of<TopSellerProvider>(context, listen: false).getTopSellerList(reload, context, _languageCode);
     // await Provider.of<FlashDealProvider>(context, listen: false).getMegaDealList(reload, context,_languageCode);
     // await Provider.of<BrandProvider>(context, listen: false).getBrandList(reload, context, _languageCode);
-    await Provider.of<ProductProvider>(context, listen: false).getLatestProductList('1', context, _languageCode, reload: reload);
+    await Provider.of<ProductProvider>(context, listen: false)
+        .getLatestProductList('1', context, _languageCode, reload: reload);
     // await Provider.of<ProductProvider>(context, listen: false).getFeaturedProductList('1', context, _languageCode, reload: reload);
     // await Provider.of<FeaturedDealProvider>(context, listen: false).getFeaturedDealList(reload, context, _languageCode);
     // await Provider.of<ProductProvider>(context, listen: false).getLProductList('1', context, _languageCode, reload: reload);
@@ -75,16 +80,20 @@ class _HomePageState extends State<HomePage> {
 
     Provider.of<CartProvider>(context, listen: false).uploadToServer(context);
 
-    if(Provider.of<AuthProvider>(context, listen: false).isLoggedIn()) {
+    if (Provider.of<AuthProvider>(context, listen: false).isLoggedIn()) {
       Provider.of<CartProvider>(context, listen: false).getCartDataAPI(context);
-    }else {
+    } else {
       Provider.of<CartProvider>(context, listen: false).getCartData();
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    List<String> types =[getTranslated('new_arrival', context),getTranslated('top_product', context), getTranslated('best_selling', context)];
+    List<String> types = [
+      getTranslated('new_arrival', context),
+      getTranslated('top_product', context),
+      getTranslated('best_selling', context)
+    ];
     return Scaffold(
       backgroundColor: ColorResources.getHomeBg(context),
       resizeToAvoidBottomInset: false,
@@ -107,9 +116,10 @@ class _HomePageState extends State<HomePage> {
                 backgroundColor: Theme.of(context).highlightColor,
                 title: Image.asset(Images.logo_with_name_image, height: 35),
                 actions: [
-
                   IconButton(
-                    onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (_) => CartScreen()));
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => CartScreen()));
                     },
                     icon: Stack(clipBehavior: Clip.none, children: [
                       Image.asset(
@@ -118,19 +128,24 @@ class _HomePageState extends State<HomePage> {
                         width: Dimensions.ICON_SIZE_DEFAULT,
                         color: ColorResources.getPrimary(context),
                       ),
-                      Positioned(top: -4, right: -4,
-                        child: Consumer<CartProvider>(builder: (context, cart, child) {
-                          return CircleAvatar(radius: 7, backgroundColor: ColorResources.RED,
+                      Positioned(
+                        top: -4,
+                        right: -4,
+                        child: Consumer<CartProvider>(
+                            builder: (context, cart, child) {
+                          return CircleAvatar(
+                            radius: 7,
+                            backgroundColor: ColorResources.RED,
                             child: Text(cart.cartList.length.toString(),
-                                style: titilliumSemiBold.copyWith(color: ColorResources.WHITE, fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL,
+                                style: titilliumSemiBold.copyWith(
+                                  color: ColorResources.WHITE,
+                                  fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL,
                                 )),
                           );
                         }),
                       ),
                     ]),
                   ),
-
-
                 ],
               ),
 
@@ -139,16 +154,31 @@ class _HomePageState extends State<HomePage> {
                   pinned: true,
                   delegate: SliverDelegate(
                       child: InkWell(
-                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => SearchScreen())),
-                        child: Container(padding: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_SMALL, vertical: 2),
-                          color: Theme.of(context).highlightColor,
-                          alignment: Alignment.center,
-                          child: Container(padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL), height: 50, alignment: Alignment.centerLeft,
-                            decoration: BoxDecoration(color: ColorResources.getGrey(context), borderRadius: BorderRadius.circular(
-                              Dimensions.PADDING_SIZE_SMALL),),
-                            child: Row(children: [Icon(Icons.search, color: ColorResources.getPrimary(context), size: Dimensions.ICON_SIZE_LARGE),
-                              SizedBox(width: 5),
-                              Text(getTranslated('SEARCH_HINT', context), style: robotoRegular.copyWith(color: Theme.of(context).hintColor)),
+                    onTap: () => Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => SearchScreen())),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: Dimensions.PADDING_SIZE_SMALL,
+                          vertical: 2),
+                      color: Theme.of(context).highlightColor,
+                      alignment: Alignment.center,
+                      child: Container(
+                        padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+                        height: 50,
+                        alignment: Alignment.centerLeft,
+                        decoration: BoxDecoration(
+                          color: ColorResources.getGrey(context),
+                          borderRadius: BorderRadius.circular(
+                              Dimensions.PADDING_SIZE_SMALL),
+                        ),
+                        child: Row(children: [
+                          Icon(Icons.search,
+                              color: ColorResources.getPrimary(context),
+                              size: Dimensions.ICON_SIZE_LARGE),
+                          SizedBox(width: 5),
+                          Text(getTranslated('SEARCH_HINT', context),
+                              style: robotoRegular.copyWith(
+                                  color: Theme.of(context).hintColor)),
                         ]),
                       ),
                     ),
@@ -329,10 +359,13 @@ class _HomePageState extends State<HomePage> {
                     // ),
 
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_SMALL),
-                      child: ProductView(isHomePage: false, productType: ProductType.NEW_ARRIVAL, scrollController: _scrollController),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: Dimensions.PADDING_SIZE_SMALL),
+                      child: ProductView(
+                          isHomePage: false,
+                          productType: ProductType.NEW_ARRIVAL,
+                          scrollController: _scrollController),
                     ),
-
                   ],
                 ),
               )
@@ -349,7 +382,8 @@ class SliverDelegate extends SliverPersistentHeaderDelegate {
   SliverDelegate({@required this.child});
 
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
     return child;
   }
 
@@ -361,6 +395,8 @@ class SliverDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(SliverDelegate oldDelegate) {
-    return oldDelegate.maxExtent != 50 || oldDelegate.minExtent != 50 || child != oldDelegate.child;
+    return oldDelegate.maxExtent != 50 ||
+        oldDelegate.minExtent != 50 ||
+        child != oldDelegate.child;
   }
 }

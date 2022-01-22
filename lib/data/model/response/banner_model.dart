@@ -7,7 +7,14 @@ class BannerModel {
   String _updatedAt;
   String _url;
 
-  BannerModel({int id, String photo, String bannerType, int published, String createdAt, String updatedAt, String url}) {
+  BannerModel(
+      {int id,
+      String photo,
+      String bannerType,
+      int published,
+      String createdAt,
+      String updatedAt,
+      String url}) {
     this._id = id;
     this._photo = photo;
     this._bannerType = bannerType;

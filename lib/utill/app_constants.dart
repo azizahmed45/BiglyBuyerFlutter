@@ -1,7 +1,7 @@
 import 'package:bigly24/data/model/response/language_model.dart';
 
 class AppConstants {
-  static const String APP_NAME = '6valley';
+  static const String APP_NAME = 'Bigly24';
 
   static const String BASE_URL = 'https://api.bigly24.com/';
   static const String USER_ID = 'userId';
