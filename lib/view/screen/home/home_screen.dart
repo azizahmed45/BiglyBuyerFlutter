@@ -55,7 +55,8 @@ class _HomePageState extends State<HomePage> {
     Provider.of<BannerProvider>(context, listen: false).initBanner();
     // await Provider.of<BannerProvider>(context, listen: false).getBannerList(reload, context);
     // await Provider.of<BannerProvider>(context, listen: false).getFooterBannerList(context);
-    // await Provider.of<CategoryProvider>(context, listen: false).getCategoryList(reload, context, _languageCode);
+    await Provider.of<CategoryProvider>(context, listen: false)
+        .getCategoryList(reload, context, _languageCode);
     // await Provider.of<HomeCategoryProductProvider>(context, listen: false).getHomeCategoryProductList(reload, context, _languageCode);
     // await Provider.of<TopSellerProvider>(context, listen: false).getTopSellerList(reload, context, _languageCode);
     // await Provider.of<FlashDealProvider>(context, listen: false).getMegaDealList(reload, context,_languageCode);
@@ -192,21 +193,29 @@ class _HomePageState extends State<HomePage> {
                           EdgeInsets.only(top: Dimensions.PADDING_SIZE_LARGE),
                       child: BannersView(),
                     ),
-                    //
-                    // // Category
-                    // Padding(
-                    //   padding: EdgeInsets.fromLTRB(Dimensions.PADDING_SIZE_SMALL, 20, Dimensions.PADDING_SIZE_SMALL, Dimensions.PADDING_SIZE_SMALL),
-                    //   child: TitleRow(
-                    //       title: getTranslated('CATEGORY', context),
-                    //       onTap: () {
-                    //         Navigator.push(context, MaterialPageRoute(builder: (_) => AllCategoryScreen()));
-                    //       }),
-                    // ),
-                    // Padding(
-                    //   padding: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_SMALL),
-                    //   child: CategoryView(isHomePage: true),
-                    // ),
-                    //
+
+                    // Category
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(
+                          Dimensions.PADDING_SIZE_SMALL,
+                          20,
+                          Dimensions.PADDING_SIZE_SMALL,
+                          Dimensions.PADDING_SIZE_SMALL),
+                      child: TitleRow(
+                          title: getTranslated('CATEGORY', context),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => AllCategoryScreen()));
+                          }),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: Dimensions.PADDING_SIZE_SMALL),
+                      child: CategoryView(isHomePage: true),
+                    ),
+
                     // // Mega Deal
                     // Consumer<FlashDealProvider>(
                     //   builder: (context, flashDeal, child) {

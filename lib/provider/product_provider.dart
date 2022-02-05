@@ -17,7 +17,6 @@ class ProductProvider extends ChangeNotifier {
   List<Product> get lProductList => _lProductList;
   List<Product> _featuredProductList = [];
 
-
   ProductType _productType = ProductType.NEW_ARRIVAL;
   String _title = 'New Arrival';
 
@@ -64,10 +63,10 @@ class ProductProvider extends ChangeNotifier {
 
   int get featuredPageSize => _featuredPageSize;
 
-
   //latest product
-  Future<void> getLatestProductList(String offset, BuildContext context,
-      String languageCode, {bool reload = false}) async {
+  Future<void> getLatestProductList(
+      String offset, BuildContext context, String languageCode,
+      {bool reload = false}) async {
     if (reload) {
       _offsetList = [];
       _latestProductList = [];
@@ -77,12 +76,10 @@ class ProductProvider extends ChangeNotifier {
       ApiResponse apiResponse = await productRepo.getLatestProductList(offset);
       if (apiResponse.response != null &&
           apiResponse.response.statusCode == 200) {
-        _latestProductList.addAll(ProductModel
-            .fromJson(apiResponse.response.data)
-            .products);
-        _latestPageSize = ProductModel
-            .fromJson(apiResponse.response.data)
-            .totalSize;
+        _latestProductList
+            .addAll(ProductModel.fromJson(apiResponse.response.data).products);
+        _latestPageSize =
+            ProductModel.fromJson(apiResponse.response.data).totalSize;
         _filterFirstLoading = false;
         _filterIsLoading = false;
       } else {
@@ -98,24 +95,22 @@ class ProductProvider extends ChangeNotifier {
   }
 
   //latest product
-  Future<void> getLProductList(String offset, BuildContext context,
-      String languageCode, {bool reload = false}) async {
+  Future<void> getLProductList(
+      String offset, BuildContext context, String languageCode,
+      {bool reload = false}) async {
     if (reload) {
       _lOffsetList = [];
       _lProductList = [];
     }
     if (!_lOffsetList.contains(offset)) {
       _lOffsetList.add(offset);
-      ApiResponse apiResponse = await productRepo.getLProductList(
-        offset, languageCode);
+      ApiResponse apiResponse =
+          await productRepo.getLProductList(offset, languageCode);
       if (apiResponse.response != null &&
           apiResponse.response.statusCode == 200) {
-        _lProductList.addAll(ProductModel
-            .fromJson(apiResponse.response.data)
-            .products);
-        _lPageSize = ProductModel
-            .fromJson(apiResponse.response.data)
-            .totalSize;
+        _lProductList
+            .addAll(ProductModel.fromJson(apiResponse.response.data).products);
+        _lPageSize = ProductModel.fromJson(apiResponse.response.data).totalSize;
         _firstLoading = false;
         _isLoading = false;
       } else {
@@ -130,13 +125,9 @@ class ProductProvider extends ChangeNotifier {
     }
   }
 
-
   Future<int> getLatestOffset(String languageCode) async {
-    ApiResponse apiResponse = await productRepo.getLatestProductList(
-        '1');
-    return ProductModel
-        .fromJson(apiResponse.response.data)
-        .totalSize;
+    ApiResponse apiResponse = await productRepo.getLatestProductList('1');
+    return ProductModel.fromJson(apiResponse.response.data).totalSize;
   }
 
   void changeTypeOfProduct(ProductType type, String title) {
@@ -170,19 +161,16 @@ class ProductProvider extends ChangeNotifier {
 
   void initSellerProductList(String sellerId, String offset,
       BuildContext context, String languageCode) async {
-    ApiResponse apiResponse = await productRepo.getSellerProductList(
-        sellerId, offset, languageCode);
+    ApiResponse apiResponse =
+        await productRepo.getSellerProductList(sellerId, offset, languageCode);
     if (apiResponse.response != null &&
         apiResponse.response.statusCode == 200) {
-      _sellerProductList.addAll(ProductModel
-          .fromJson(apiResponse.response.data)
-          .products);
-      _sellerAllProductList.addAll(ProductModel
-          .fromJson(apiResponse.response.data)
-          .products);
-      _sellerPageSize = ProductModel
-          .fromJson(apiResponse.response.data)
-          .totalSize;
+      _sellerProductList
+          .addAll(ProductModel.fromJson(apiResponse.response.data).products);
+      _sellerAllProductList
+          .addAll(ProductModel.fromJson(apiResponse.response.data).products);
+      _sellerPageSize =
+          ProductModel.fromJson(apiResponse.response.data).totalSize;
       _firstLoading = false;
       _isLoading = false;
     } else {
@@ -227,13 +215,15 @@ class ProductProvider extends ChangeNotifier {
         isBrand, id, languageCode);
     if (apiResponse.response != null &&
         apiResponse.response.statusCode == 200) {
-      apiResponse.response.data.forEach((product) =>
-          _brandOrCategoryProductList.add(Product.fromJson(product)));
-      _hasData = _brandOrCategoryProductList.length > 1;
-      List<Product> _products = [];
-      _products.addAll(_brandOrCategoryProductList);
-      _brandOrCategoryProductList.clear();
-      _brandOrCategoryProductList.addAll(_products.reversed);
+      _brandOrCategoryProductList
+          .addAll(ProductModel.fromJson(apiResponse.response.data).products);
+      // apiResponse.response.data.forEach((product) =>
+      //     _brandOrCategoryProductList.add(Product.fromJson(product)));
+      // _hasData = _brandOrCategoryProductList.length > 1;
+      // List<Product> _products = [];
+      // _products.addAll(_brandOrCategoryProductList);
+      // _brandOrCategoryProductList.clear();
+      // _brandOrCategoryProductList.addAll(_products.reversed);
     } else {
       ApiChecker.checkApi(context, apiResponse);
     }
@@ -245,14 +235,15 @@ class ProductProvider extends ChangeNotifier {
 
   List<Product> get relatedProductList => _relatedProductList;
 
-  void initRelatedProductList(String id, BuildContext context,
-      String languageCode) async {
-    ApiResponse apiResponse = await productRepo.getRelatedProductList(
-        id, languageCode);
+  void initRelatedProductList(
+      String id, BuildContext context, String languageCode) async {
+    ApiResponse apiResponse =
+        await productRepo.getRelatedProductList(id, languageCode);
     if (apiResponse.response != null &&
         apiResponse.response.statusCode == 200) {
       _relatedProductList = [];
-      _relatedProductList.addAll(ProductModel.fromJson(apiResponse.response.data).products);
+      _relatedProductList
+          .addAll(ProductModel.fromJson(apiResponse.response.data).products);
       // apiResponse.response.data.forEach((product) =>
       //     _relatedProductList.add(Product.fromJson(product)));
     } else {
@@ -266,24 +257,23 @@ class ProductProvider extends ChangeNotifier {
   }
 
   //featured product
-  Future<void> getFeaturedProductList(String offset, BuildContext context,
-      String languageCode, {bool reload = false}) async {
+  Future<void> getFeaturedProductList(
+      String offset, BuildContext context, String languageCode,
+      {bool reload = false}) async {
     if (reload) {
       _featuredOffsetList = [];
       _featuredProductList = [];
     }
     if (!_featuredOffsetList.contains(offset)) {
       _featuredOffsetList.add(offset);
-      ApiResponse apiResponse = await productRepo.getFeaturedProductList(
-          offset, languageCode);
+      ApiResponse apiResponse =
+          await productRepo.getFeaturedProductList(offset, languageCode);
       if (apiResponse.response != null &&
           apiResponse.response.statusCode == 200) {
-        _featuredProductList.addAll(ProductModel
-            .fromJson(apiResponse.response.data)
-            .products);
-        _featuredPageSize = ProductModel
-            .fromJson(apiResponse.response.data)
-            .totalSize;
+        _featuredProductList
+            .addAll(ProductModel.fromJson(apiResponse.response.data).products);
+        _featuredPageSize =
+            ProductModel.fromJson(apiResponse.response.data).totalSize;
         _firstFeaturedLoading = false;
         _isFeaturedLoading = false;
       } else {
@@ -297,5 +287,4 @@ class ProductProvider extends ChangeNotifier {
       }
     }
   }
-
 }

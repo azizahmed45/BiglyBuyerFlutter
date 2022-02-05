@@ -6,18 +6,24 @@ class AppConstants {
   static const String BASE_URL = 'https://api.bigly24.com/';
   static const String USER_ID = 'userId';
   static const String NAME = 'name';
-  static const String CATEGORIES_URI = 'api/v1/categories';
+  static const String CATEGORIES_URI = 'api/categories';
   static const String BRANDS_URI = 'api/v1/brands';
   static const String BRAND_PRODUCT_URI = 'api/v1/brands/products/';
-  static const String CATEGORY_PRODUCT_URI = 'api/v1/categories/products/';
+  static const String CATEGORY_PRODUCT_URI = 'api/product-categories/';
   static const String REGISTRATION_URI = 'api/buyer/registration';
   static const String LOGIN_URI = 'api/buyer/login';
-  static const String LATEST_PRODUCTS_URI = 'api/v1/products/latest?limit=10&&offset=';
-  static const String NEW_ARRIVAL_PRODUCTS_URI = 'api/v1/products/latest?limit=10&&offset=';
-  static const String TOP_PRODUCTS_URI = 'api/v1/products/top-rated?limit=10&&offset=';
-  static const String BEST_SELLING_PRODUCTS_URI = 'api/v1/products/best-sellings?limit=1&offset=';
-  static const String FEATURED_PRODUCTS_URI = 'api/v1/products/featured?limit=10&&offset=';
-  static const String HOME_CATEGORY_PRODUCTS_URI = 'api/v1/products/home-categories';
+  static const String LATEST_PRODUCTS_URI =
+      'api/v1/products/latest?limit=10&&offset=';
+  static const String NEW_ARRIVAL_PRODUCTS_URI =
+      'api/v1/products/latest?limit=10&&offset=';
+  static const String TOP_PRODUCTS_URI =
+      'api/v1/products/top-rated?limit=10&&offset=';
+  static const String BEST_SELLING_PRODUCTS_URI =
+      'api/v1/products/best-sellings?limit=1&offset=';
+  static const String FEATURED_PRODUCTS_URI =
+      'api/v1/products/featured?limit=10&&offset=';
+  static const String HOME_CATEGORY_PRODUCTS_URI =
+      'api/v1/products/home-categories';
 
   static const String PRODUCTS_URL = 'api/products';
 
@@ -25,31 +31,40 @@ class AppConstants {
   static const String PRODUCT_REVIEW_URI = 'api/v1/products/reviews/';
   static const String SEARCH_URI = 'api/searchProduct?title_contains=';
   static const String CONFIG_URI = 'api/v1/config';
-  static const String ADD_WISH_LIST_URI = 'api/v1/customer/wish-list/add?product_id=';
-  static const String REMOVE_WISH_LIST_URI = 'api/v1/customer/wish-list/remove?product_id=';
+  static const String ADD_WISH_LIST_URI =
+      'api/v1/customer/wish-list/add?product_id=';
+  static const String REMOVE_WISH_LIST_URI =
+      'api/v1/customer/wish-list/remove?product_id=';
   static const String UPDATE_PROFILE_URI = 'api/v1/customer/update-profile';
   static const String CUSTOMER_URI = 'api/v1/customer/info';
   static const String ADDRESS_LIST_URI = 'api/v1/customer/address/list';
-  static const String REMOVE_ADDRESS_URI = 'api/v1/customer/address?address_id=';
+  static const String REMOVE_ADDRESS_URI =
+      'api/v1/customer/address?address_id=';
   static const String ADD_ADDRESS_URI = 'api/v1/customer/address/add';
   static const String WISH_LIST_GET_URI = 'api/v1/customer/wish-list';
-  static const String SUPPORT_TICKET_URI = 'api/v1/customer/support-ticket/create';
-  static const String MAIN_BANNER_URI = 'api/v1/banners?banner_type=main_banner';
-  static const String FOOTER_BANNER_URI = 'api/v1/banners?banner_type=footer_banner';
+  static const String SUPPORT_TICKET_URI =
+      'api/v1/customer/support-ticket/create';
+  static const String MAIN_BANNER_URI =
+      'api/v1/banners?banner_type=main_banner';
+  static const String FOOTER_BANNER_URI =
+      'api/v1/banners?banner_type=footer_banner';
   static const String RELATED_PRODUCT_URI = '/api/products/related-products/';
   static const String ORDER_URI = 'api/v1/customer/order/list';
-  static const String ORDER_DETAILS_URI = 'api/v1/customer/order/details?order_id=';
+  static const String ORDER_DETAILS_URI =
+      'api/v1/customer/order/details?order_id=';
   static const String ORDER_PLACE_URI = 'api/v1/customer/order/place';
   static const String SELLER_URI = 'api/v1/seller?seller_id=';
   static const String SELLER_PRODUCT_URI = 'api/v1/seller/';
   static const String TOP_SELLER = 'api/v1/seller/top';
 
-
   static const String TRACKING_URI = 'api/v1/order/track?order_id=';
   static const String FORGET_PASSWORD_URI = 'api/v1/auth/forgot-password';
-  static const String SUPPORT_TICKET_GET_URI = 'api/v1/customer/support-ticket/get';
-  static const String SUPPORT_TICKET_CONV_URI = 'api/v1/customer/support-ticket/conv/';
-  static const String SUPPORT_TICKET_REPLY_URI = 'api/v1/customer/support-ticket/reply/';
+  static const String SUPPORT_TICKET_GET_URI =
+      'api/v1/customer/support-ticket/get';
+  static const String SUPPORT_TICKET_CONV_URI =
+      'api/v1/customer/support-ticket/conv/';
+  static const String SUPPORT_TICKET_REPLY_URI =
+      'api/v1/customer/support-ticket/reply/';
   static const String SUBMIT_REVIEW_URI = 'api/v1/products/reviews/submit';
   static const String FLASH_DEAL_URI = 'api/v1/flash-deals';
   static const String FEATURED_DEAL_URI = 'api/v1/deals/featured';
@@ -69,8 +84,10 @@ class AppConstants {
   static const String UPDATE_CART_QUANTITY_URI = 'api/v1/cart/update';
   static const String REMOVE_FROM_CART_URI = 'api/v1/cart/remove';
   static const String GET_SHIPPING_METHOD = 'api/v1/shipping-method/by-seller';
-  static const String CHOOSE_SHIPPING_METHOD = 'api/v1/shipping-method/choose-for-order';
-  static const String CHOSEN_SHIPPING_METHOD_URI = 'api/v1/shipping-method/chosen';
+  static const String CHOOSE_SHIPPING_METHOD =
+      'api/v1/shipping-method/choose-for-order';
+  static const String CHOSEN_SHIPPING_METHOD_URI =
+      'api/v1/shipping-method/chosen';
   static const String GET_SHIPPING_INFO = 'api/v1/shipping-method/detail/1';
   static const String CHECK_PHONE_URI = 'api/v1/auth/check-phone';
   static const String VERIFY_PHONE_URI = 'api/v1/auth/verify-phone';
@@ -109,7 +126,15 @@ class AppConstants {
   static const String TOPIC = 'sixvalley';
 
   static List<LanguageModel> languages = [
-    LanguageModel(imageUrl: '', languageName: 'English', countryCode: 'US', languageCode: 'en'),
-    LanguageModel(imageUrl: '', languageName: 'Arabic', countryCode: 'SA', languageCode: 'ar'),
+    LanguageModel(
+        imageUrl: '',
+        languageName: 'English',
+        countryCode: 'US',
+        languageCode: 'en'),
+    LanguageModel(
+        imageUrl: '',
+        languageName: 'Arabic',
+        countryCode: 'SA',
+        languageCode: 'ar'),
   ];
 }

@@ -11,14 +11,14 @@ class Category {
 
   Category(
       {int id,
-        String name,
-        String slug,
-        String icon,
-        int parentId,
-        int position,
-        String createdAt,
-        String updatedAt,
-        List<SubCategory> subCategories}) {
+      String name,
+      String slug,
+      String icon,
+      int parentId,
+      int position,
+      String createdAt,
+      String updatedAt,
+      List<SubCategory> subCategories}) {
     this._id = id;
     this._name = name;
     this._slug = slug;
@@ -49,9 +49,9 @@ class Category {
     _position = json['position'];
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
-    if (json['childes'] != null) {
+    if (json['sub_categories'] != null) {
       _subCategories = [];
-      json['childes'].forEach((v) {
+      json['sub_categories'].forEach((v) {
         _subCategories.add(new SubCategory.fromJson(v));
       });
     }
@@ -68,7 +68,8 @@ class Category {
     data['created_at'] = this._createdAt;
     data['updated_at'] = this._updatedAt;
     if (this._subCategories != null) {
-      data['childes'] = this._subCategories.map((v) => v.toJson()).toList();
+      data['sub_categories'] =
+          this._subCategories.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -87,14 +88,14 @@ class SubCategory {
 
   SubCategory(
       {int id,
-        String name,
-        String slug,
-        String icon,
-        int parentId,
-        int position,
-        String createdAt,
-        String updatedAt,
-        List<SubSubCategory> subSubCategories}) {
+      String name,
+      String slug,
+      String icon,
+      int parentId,
+      int position,
+      String createdAt,
+      String updatedAt,
+      List<SubSubCategory> subSubCategories}) {
     this._id = id;
     this._name = name;
     this._slug = slug;
@@ -125,9 +126,9 @@ class SubCategory {
     _position = json['position'];
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
-    if (json['childes'] != null) {
+    if (json['sub_categories'] != null) {
       _subSubCategories = [];
-      json['childes'].forEach((v) {
+      json['sub_categories'].forEach((v) {
         _subSubCategories.add(new SubSubCategory.fromJson(v));
       });
     }
@@ -144,7 +145,8 @@ class SubCategory {
     data['created_at'] = this._createdAt;
     data['updated_at'] = this._updatedAt;
     if (this._subSubCategories != null) {
-      data['childes'] = this._subSubCategories.map((v) => v.toJson()).toList();
+      data['sub_categories'] =
+          this._subSubCategories.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -162,13 +164,13 @@ class SubSubCategory {
 
   SubSubCategory(
       {int id,
-        String name,
-        String slug,
-        String icon,
-        int parentId,
-        int position,
-        String createdAt,
-        String updatedAt}) {
+      String name,
+      String slug,
+      String icon,
+      int parentId,
+      int position,
+      String createdAt,
+      String updatedAt}) {
     this._id = id;
     this._name = name;
     this._slug = slug;

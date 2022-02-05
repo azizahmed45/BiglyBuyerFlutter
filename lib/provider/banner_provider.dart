@@ -24,7 +24,7 @@ class BannerProvider extends ChangeNotifier {
 
     BannerModel banner2 = BannerModel(
         photo:
-            "https://bigly24.com/_next/image?url=%2Fstatic%2Fimg%2Fslider%2Fslider5.avif&w=1080&q=75");
+            "https://bigly24.com/_next/image?url=%2Fstatic%2Fimg%2Fslider%2Fslider.jpg&w=1080&q=75");
 
     _mainBannerList = [];
     _mainBannerList.add(banner1);
