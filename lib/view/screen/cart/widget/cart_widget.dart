@@ -11,7 +11,7 @@ import 'package:bigly24/utill/dimensions.dart';
 import 'package:bigly24/utill/images.dart';
 import 'package:provider/provider.dart';
 
-class CartWidget extends StatelessWidget {
+class CartWidget extends StatefulWidget {
   final CartModel cartModel;
   final int index;
   final bool fromCheckout;
@@ -22,7 +22,13 @@ class CartWidget extends StatelessWidget {
       @required this.fromCheckout});
 
   @override
+  State<CartWidget> createState() => _CartWidgetState();
+}
+
+class _CartWidgetState extends State<CartWidget> {
+  @override
   Widget build(BuildContext context) {
+    TextEditingController textEditingController = TextEditingController(text:widget.cartModel.quantity.toString());
     return Container(
       margin: EdgeInsets.only(top: Dimensions.PADDING_SIZE_SMALL),
       padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
@@ -52,7 +58,7 @@ class CartWidget extends StatelessWidget {
             placeholder: Images.placeholder,
             height: 50,
             width: 50,
-            image: '${cartModel.thumbnail}',
+            image: '${widget.cartModel.thumbnail}',
             imageErrorBuilder: (c, o, s) =>
                 Image.asset(Images.placeholder, height: 50, width: 50),
           ),
@@ -65,7 +71,7 @@ class CartWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(cartModel.name,
+                Text(widget.cartModel.name,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: titilliumBold.copyWith(
@@ -76,11 +82,11 @@ class CartWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      PriceConverter.convertPrice(context, cartModel.price),
+                      PriceConverter.convertPrice(context, widget.cartModel.price),
                       style: titilliumSemiBold.copyWith(
                           color: ColorResources.getPrimary(context)),
                     ),
-                    cartModel.discount != null && cartModel.discount > 0
+                    widget.cartModel.discount != null && widget.cartModel.discount > 0
                         ? Container(
                             width: 80,
                             padding: EdgeInsets.symmetric(
@@ -97,8 +103,8 @@ class CartWidget extends StatelessWidget {
                               child: Text(
                                 PriceConverter.percentageCalculation(
                                     context,
-                                    cartModel.price,
-                                    cartModel.discount,
+                                    widget.cartModel.price,
+                                    widget.cartModel.discount,
                                     'amount'),
                                 textAlign: TextAlign.center,
                                 style: titilliumRegular.copyWith(
@@ -118,22 +124,42 @@ class CartWidget extends StatelessWidget {
                                 right: Dimensions.PADDING_SIZE_SMALL),
                             child: QuantityButton(
                                 isIncrement: false,
-                                index: index,
-                                quantity: cartModel.quantity,
+                                index: widget.index,
+                                quantity: widget.cartModel.quantity,
                                 maxQty: 20,
-                                cartModel: cartModel),
+                                cartModel: widget.cartModel),
                           ),
-                          Text(cartModel.quantity.toString(),
-                              style: titilliumSemiBold),
+                          // Text(cartModel.quantity.toString(),
+                          //     style: titilliumSemiBold),
+                          Container(
+                            width: 100,
+                            height: 30,
+                            alignment: Alignment.center,
+                            child: Focus(
+                              child: TextField(decoration: InputDecoration(
+                                contentPadding: EdgeInsets.only(bottom: 5, left: 10),
+                                border: OutlineInputBorder(),
+                              ),controller: textEditingController,
+                                maxLines: 1,
+                                keyboardType: TextInputType.number,
+                                ),
+                              onFocusChange: (focus){
+                                if(!focus){
+                                  Provider.of<CartProvider>(context, listen: false)
+                                      .setQuantityValue(int.parse(textEditingController.value.text), widget.index);
+                                }
+                              },
+                            ),
+                          ),
                           Padding(
                             padding: EdgeInsets.symmetric(
                                 horizontal: Dimensions.PADDING_SIZE_SMALL),
                             child: QuantityButton(
-                                index: index,
+                                index: widget.index,
                                 isIncrement: true,
-                                quantity: cartModel.quantity,
+                                quantity: widget.cartModel.quantity,
                                 maxQty: 20,
-                                cartModel: cartModel),
+                                cartModel: widget.cartModel),
                           ),
                         ],
                       )
@@ -142,7 +168,7 @@ class CartWidget extends StatelessWidget {
             ),
           ),
         ),
-        !fromCheckout
+        !widget.fromCheckout
             ? IconButton(
                 onPressed: () {
                   // if (Provider.of<AuthProvider>(context, listen: false)
@@ -151,7 +177,7 @@ class CartWidget extends StatelessWidget {
                   //       .removeFromCartAPI(context, cartModel.id);
                   // } else {
                   Provider.of<CartProvider>(context, listen: false)
-                      .removeFromCart(index);
+                      .removeFromCart(widget.index);
                   // }
                 },
                 icon: Icon(Icons.cancel, color: ColorResources.RED),
@@ -167,7 +193,7 @@ class QuantityButton extends StatelessWidget {
   final bool isIncrement;
   final int quantity;
   final int index;
-  final int maxQty;
+  int maxQty;
   QuantityButton(
       {@required this.isIncrement,
       @required this.quantity,
@@ -177,6 +203,7 @@ class QuantityButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    maxQty = 100000000;
     return InkWell(
       onTap: () {
         if (!isIncrement && quantity > 1) {

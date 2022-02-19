@@ -159,6 +159,17 @@ class CartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setQuantityValue(int value, int index) {
+
+      _cartList[index].quantity = value;
+      // _isSelectedList[index] ? _amount = _amount + _cartList[index].discount : _amount = _amount;
+      _amount = value * _cartList[index].price;
+
+
+    cartRepo.addToCartList(_cartList);
+    notifyListeners();
+  }
+
   void toggleSelected(int index) {
     _isSelectedList[index] = !_isSelectedList[index];
     _amount = 0.0;

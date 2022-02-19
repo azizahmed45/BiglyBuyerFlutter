@@ -123,7 +123,7 @@ class AppConstants {
   static const String COUNTRY_CODE = 'country_code';
   static const String LANGUAGE_CODE = 'language_code';
   static const String THEME = 'theme';
-  static const String TOPIC = 'sixvalley';
+  static const String TOPIC = 'bigly24';
 
   static List<LanguageModel> languages = [
     LanguageModel(

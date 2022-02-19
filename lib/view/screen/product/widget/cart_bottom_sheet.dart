@@ -103,9 +103,12 @@ class _CartBottomSheetState extends State<CartBottomSheet> {
               // double priceWithQuantity = priceWithDiscount * details.quantity;
               //
 
-              int _stock = 99999999;
+              int _stock = 100000000;
               double priceWithQuantity =
                   widget.product.unitPrice * details.quantity;
+
+              TextEditingController textEditingController =
+                  TextEditingController(text: Provider.of<ProductDetailsProvider>(context, listen: false).quantity.toString());
 
               return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -223,8 +226,32 @@ class _CartBottomSheetState extends State<CartBottomSheet> {
                           style: robotoBold),
                       QuantityButton(
                           isIncrement: false, quantity: details.quantity),
-                      Text(details.quantity.toString(),
-                          style: titilliumSemiBold),
+                      Container(
+                        width: 100,
+                        height: 30,
+                        alignment: Alignment.center,
+                        child: Focus(
+                          child: TextField(
+                            decoration: InputDecoration(
+                              contentPadding:
+                                  EdgeInsets.only(bottom: 5, left: 10),
+                              border: OutlineInputBorder(),
+                            ),
+                            controller: textEditingController,
+                            maxLines: 1,
+                            // keyboardType: TextInputType.number,
+                          ),
+
+                          onFocusChange: (focus) {
+                            if (!focus) {
+                              Provider.of<ProductDetailsProvider>(context,
+                                      listen: false)
+                                  .setQuantity(int.parse(
+                                      textEditingController.value.text));
+                            }
+                          },
+                        ),
+                      ),
                       QuantityButton(
                         isIncrement: true,
                         quantity: details.quantity,
