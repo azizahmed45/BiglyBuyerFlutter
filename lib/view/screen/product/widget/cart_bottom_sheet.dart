@@ -40,16 +40,23 @@ class _CartBottomSheetState extends State<CartBottomSheet> {
     }
   }
 
+  TextEditingController _textEditingController;
+
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     Provider.of<ProductDetailsProvider>(context, listen: false)
         .initData(widget.product);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
 
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+          padding: EdgeInsets.only(left: Dimensions.PADDING_SIZE_SMALL,right: Dimensions.PADDING_SIZE_SMALL,top: Dimensions.PADDING_SIZE_SMALL, bottom: MediaQuery.of(context).viewInsets.bottom),
           decoration: BoxDecoration(
             color: Theme.of(context).highlightColor,
             borderRadius: BorderRadius.only(
@@ -107,8 +114,8 @@ class _CartBottomSheetState extends State<CartBottomSheet> {
               double priceWithQuantity =
                   widget.product.unitPrice * details.quantity;
 
-              TextEditingController textEditingController =
-                  TextEditingController(text: Provider.of<ProductDetailsProvider>(context, listen: false).quantity.toString());
+              _textEditingController = TextEditingController(text: details.quantity.toString());
+              _textEditingController.selection = TextSelection.fromPosition(TextPosition(offset: _textEditingController.text.length));
 
               return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -230,27 +237,26 @@ class _CartBottomSheetState extends State<CartBottomSheet> {
                         width: 100,
                         height: 30,
                         alignment: Alignment.center,
-                        child: Focus(
+
                           child: TextField(
                             decoration: InputDecoration(
                               contentPadding:
                                   EdgeInsets.only(bottom: 5, left: 10),
                               border: OutlineInputBorder(),
                             ),
-                            controller: textEditingController,
+                            controller: _textEditingController,
                             maxLines: 1,
-                            // keyboardType: TextInputType.number,
+
+                            keyboardType: TextInputType.number,
+                            onChanged: (value){
+                              Provider.of<ProductDetailsProvider>(context,
+                                  listen: false)
+                                  .setQuantity(int.parse(value));
+                            },
                           ),
 
-                          onFocusChange: (focus) {
-                            if (!focus) {
-                              Provider.of<ProductDetailsProvider>(context,
-                                      listen: false)
-                                  .setQuantity(int.parse(
-                                      textEditingController.value.text));
-                            }
-                          },
-                        ),
+
+
                       ),
                       QuantityButton(
                         isIncrement: true,
