@@ -219,7 +219,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     child: Row(children: [
                       FadeInImage.assetNetwork(
                         placeholder: Images.placeholder, fit: BoxFit.cover, width: 50, height: 50,
-                        image: '${Provider.of<SplashProvider>(context,listen: false).baseUrls.productThumbnailUrl}/${Provider.of<CartProvider>(context,listen: false).cartList[0].thumbnail}',
+                        image: '${Provider.of<CartProvider>(context,listen: false).cartList[0].thumbnail}',
                         imageErrorBuilder: (c, o, s) => Image.asset(Images.placeholder, fit: BoxFit.cover, width: 50, height: 50),
                       ),
                       SizedBox(width: Dimensions.MARGIN_SIZE_DEFAULT),
@@ -239,18 +239,21 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               style: titilliumSemiBold.copyWith(color: ColorResources.getPrimary(context)),
                             ),
                             SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
+                            Text("X", style: titilliumSemiBold.copyWith(color: ColorResources.getPrimary(context))),
+                            SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
                             Text(Provider.of<CartProvider>(context,listen: false).cartList[0].quantity.toString(), style: titilliumSemiBold.copyWith(color: ColorResources.getPrimary(context))),
-                            Container(
-                              height: 20,
-                              padding: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-                              margin: EdgeInsets.only(left: Dimensions.MARGIN_SIZE_EXTRA_LARGE),
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), border: Border.all(color: ColorResources.getPrimary(context))),
-                              child: Text(
-                                PriceConverter.percentageCalculation(context, Provider.of<CartProvider>(context,listen: false).cartList[0].price, Provider.of<CartProvider>(context,listen: false).cartList[0].discount, Provider.of<CartProvider>(context,listen: false).cartList[0].discountType),
-                                style: titilliumRegular.copyWith(fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL, color: ColorResources.getPrimary(context)),
-                              ),
-                            ),
+                            // Container(
+                            //   height: 20,
+                            //   padding: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                            //   margin: EdgeInsets.only(left: Dimensions.MARGIN_SIZE_EXTRA_LARGE),
+                            //   alignment: Alignment.center,
+                            //   decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), border: Border.all(color: ColorResources.getPrimary(context))),
+                            //   child: Text(
+                            //     // PriceConverter.percentageCalculation(context, Provider.of<CartProvider>(context,listen: false).cartList[0].price, Provider.of<CartProvider>(context,listen: false).cartList[0].discount, Provider.of<CartProvider>(context,listen: false).cartList[0].discountType),
+                            //     PriceConverter.percentageCalculation(context, Provider.of<CartProvider>(context,listen: false).cartList[0].price, Provider.of<CartProvider>(context,listen: false).cartList[0].discount, Provider.of<CartProvider>(context,listen: false).cartList[0].discountType),
+                            //     style: titilliumRegular.copyWith(fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL, color: ColorResources.getPrimary(context)),
+                            //   ),
+                            // ),
                           ]),
                         ]),
                       ),
@@ -258,43 +261,43 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   ),
 
                   // Coupon
-                  Row(children: [
-                    Expanded(
-                      child: SizedBox(
-                        height: 40,
-                        child: TextField(controller: _controller, decoration: InputDecoration(
-                          hintText: 'Have a coupon?',
-                          hintStyle: titilliumRegular.copyWith(color: ColorResources.HINT_TEXT_COLOR),
-                          filled: true,
-                          fillColor: ColorResources.getIconBg(context),
-                          border: InputBorder.none,
-                        )),
-                      ),
-                    ),
-                    SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
-                    !Provider.of<CouponProvider>(context).isLoading ? ElevatedButton(
-                      onPressed: () {
-                        if(_controller.text.isNotEmpty) {
-                          Provider.of<CouponProvider>(context, listen: false).initCoupon(_controller.text, _order).then((value) {
-                            if(value > 0) {
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:
-                              Text('You got ${PriceConverter.convertPrice(context, value)} discount'), backgroundColor: Colors.green));
-                            }else {
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                content: Text(getTranslated('invalid_coupon_or', context)),
-                                backgroundColor: Colors.red,
-                              ));
-                            }
-                          });
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: ColorResources.getGreen(context),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                      ),
-                      child: Text(getTranslated('APPLY', context)),
-                    ) : CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor)),
-                  ]),
+                  // Row(children: [
+                  //   Expanded(
+                  //     child: SizedBox(
+                  //       height: 40,
+                  //       child: TextField(controller: _controller, decoration: InputDecoration(
+                  //         hintText: 'Have a coupon?',
+                  //         hintStyle: titilliumRegular.copyWith(color: ColorResources.HINT_TEXT_COLOR),
+                  //         filled: true,
+                  //         fillColor: ColorResources.getIconBg(context),
+                  //         border: InputBorder.none,
+                  //       )),
+                  //     ),
+                  //   ),
+                  //   SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
+                  //   !Provider.of<CouponProvider>(context).isLoading ? ElevatedButton(
+                  //     onPressed: () {
+                  //       if(_controller.text.isNotEmpty) {
+                  //         Provider.of<CouponProvider>(context, listen: false).initCoupon(_controller.text, _order).then((value) {
+                  //           if(value > 0) {
+                  //             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:
+                  //             Text('You got ${PriceConverter.convertPrice(context, value)} discount'), backgroundColor: Colors.green));
+                  //           }else {
+                  //             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  //               content: Text(getTranslated('invalid_coupon_or', context)),
+                  //               backgroundColor: Colors.red,
+                  //             ));
+                  //           }
+                  //         });
+                  //       }
+                  //     },
+                  //     style: ElevatedButton.styleFrom(
+                  //       primary: ColorResources.getGreen(context),
+                  //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  //     ),
+                  //     child: Text(getTranslated('APPLY', context)),
+                  //   ) : CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor)),
+                  // ]),
 
                 ]),
               ),
@@ -312,10 +315,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                       TitleRow(title: getTranslated('TOTAL', context)),
                       AmountWidget(title: getTranslated('ORDER', context), amount: PriceConverter.convertPrice(context, _order)),
-                      AmountWidget(title: getTranslated('SHIPPING_FEE', context), amount: PriceConverter.convertPrice(context, widget.shippingFee)),
-                      AmountWidget(title: getTranslated('DISCOUNT', context), amount: PriceConverter.convertPrice(context, widget.discount)),
-                      AmountWidget(title: getTranslated('coupon_voucher', context), amount: PriceConverter.convertPrice(context, _couponDiscount)),
-                      AmountWidget(title: getTranslated('TAX', context), amount: PriceConverter.convertPrice(context, widget.tax)),
+                      // AmountWidget(title: getTranslated('SHIPPING_FEE', context), amount: PriceConverter.convertPrice(context, widget.shippingFee)),
+                      // AmountWidget(title: getTranslated('DISCOUNT', context), amount: PriceConverter.convertPrice(context, widget.discount)),
+                      // AmountWidget(title: getTranslated('coupon_voucher', context), amount: PriceConverter.convertPrice(context, _couponDiscount)),
+                      // AmountWidget(title: getTranslated('TAX', context), amount: PriceConverter.convertPrice(context, widget.tax)),
                       Divider(height: 5, color: Theme.of(context).hintColor),
                       AmountWidget(title: getTranslated('TOTAL_PAYABLE', context), amount: PriceConverter.convertPrice(context, (_order + widget.shippingFee - widget.discount - _couponDiscount + widget.tax))),
                     ]);
@@ -324,17 +327,17 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               ),
 
               // Payment Method
-              Container(
-                margin: EdgeInsets.only(top: Dimensions.PADDING_SIZE_SMALL),
-                padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-                color: Theme.of(context).highlightColor,
-                child: Column(children: [
-                  TitleRow(title: getTranslated('payment_method', context)),
-                  SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-                  CustomCheckBox(title: getTranslated('cash_on_delivery', context), index: 0),
-                  _digitalPayment ? CustomCheckBox(title: getTranslated('digital_payment', context), index: 1) : SizedBox(),
-                ]),
-              ),
+              // Container(
+              //   margin: EdgeInsets.only(top: Dimensions.PADDING_SIZE_SMALL),
+              //   padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+              //   color: Theme.of(context).highlightColor,
+              //   child: Column(children: [
+              //     TitleRow(title: getTranslated('payment_method', context)),
+              //     SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+              //     CustomCheckBox(title: getTranslated('cash_on_delivery', context), index: 0),
+              //     _digitalPayment != null && _digitalPayment ? CustomCheckBox(title: getTranslated('digital_payment', context), index: 1) : SizedBox(),
+              //   ]),
+              // ),
 
             ]),
           ),
