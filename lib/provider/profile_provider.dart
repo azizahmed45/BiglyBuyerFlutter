@@ -129,7 +129,7 @@ class ProfileProvider extends ChangeNotifier {
     ApiResponse apiResponse = await profileRepo.addAddress(addressModel);
     _isLoading = false;
 
-    if (apiResponse.response != null && apiResponse.response.statusCode == 200) {
+    if (apiResponse.response != null && apiResponse.response.statusCode == 201) {
       Map map = apiResponse.response.data;
       if(_addressList == null) {
         _addressList = [];

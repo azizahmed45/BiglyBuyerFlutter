@@ -7,6 +7,7 @@ class AddressModel {
   String city;
   String zip;
   String phone;
+  String country;
   String createdAt;
   String updatedAt;
 
@@ -19,6 +20,7 @@ class AddressModel {
         this.city,
         this.zip,
         this.phone,
+        this.country,
         this.createdAt,
         this.updatedAt});
 
@@ -31,6 +33,7 @@ class AddressModel {
     city = json['city'];
     zip = json['zip'];
     phone = json['phone'];
+    country = json['country'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
@@ -45,6 +48,7 @@ class AddressModel {
     data['city'] = this.city;
     data['zip'] = this.zip;
     data['phone'] = this.phone;
+    data['country'] = this.country;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     return data;

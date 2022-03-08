@@ -18,9 +18,11 @@ class _AddAddressBottomSheetState extends State<AddAddressBottomSheet> {
   final FocusNode _buttonAddressFocus = FocusNode();
   final FocusNode _cityFocus = FocusNode();
   final FocusNode _zipCodeFocus = FocusNode();
+  final FocusNode _countryFocus = FocusNode();
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _cityNameController = TextEditingController();
   final TextEditingController _zipCodeController = TextEditingController();
+  final TextEditingController _countryController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -108,6 +110,14 @@ class _AddAddressBottomSheetState extends State<AddAddressBottomSheet> {
                 focusNode: _zipCodeFocus,
                 textInputAction: TextInputAction.done,
               ),
+              Divider(thickness: 0.7, color: ColorResources.GREY),
+              CustomTextField(
+                hintText: getTranslated('ENTER_YOUR_COUNTRY', context),
+                controller: _countryController,
+                textInputType: TextInputType.text,
+                focusNode: _countryFocus,
+                textInputAction: TextInputAction.done,
+              ),
               SizedBox(height: 30),
               Provider.of<ProfileProvider>(context).addAddressErrorText != null
                   ? Text(Provider.of<ProfileProvider>(context).addAddressErrorText, style: titilliumRegular.copyWith(color: ColorResources.RED))
@@ -141,7 +151,10 @@ class _AddAddressBottomSheetState extends State<AddAddressBottomSheet> {
       Provider.of<ProfileProvider>(context, listen: false).setAddAddressErrorText(getTranslated('CITY_FIELD_MUST_BE_REQUIRED', context));
     } else if(_zipCodeController.text.isEmpty) {
       Provider.of<ProfileProvider>(context, listen: false).setAddAddressErrorText(getTranslated('ZIPCODE_FIELD_MUST_BE_REQUIRED', context));
-    } else {
+    }
+    else if(_countryController.text.isEmpty) {
+      Provider.of<ProfileProvider>(context, listen: false).setAddAddressErrorText(getTranslated('COUNTRY_FIELD_MUST_BE_REQUIRED', context));
+    }else {
       Provider.of<ProfileProvider>(context, listen: false).setAddAddressErrorText(null);
       AddressModel addressModel = AddressModel();
       addressModel.contactPersonName = 'x';
@@ -149,6 +162,7 @@ class _AddAddressBottomSheetState extends State<AddAddressBottomSheet> {
       addressModel.city = _cityNameController.text;
       addressModel.address = _addressController.text;
       addressModel.zip = _zipCodeController.text;
+      addressModel.country = _countryController.text;
       addressModel.phone = '0';
 
       Provider.of<ProfileProvider>(context, listen: false).addAddress(addressModel, route);
