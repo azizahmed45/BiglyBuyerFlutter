@@ -50,7 +50,13 @@ class AddressListScreen extends StatelessWidget {
                     itemBuilder: (context, index) => Card(
                       child: ListTile(
                         title: Text('Address: ${profileProvider.addressList[index].address}' ?? ""),
-                        subtitle: Text('City: ${profileProvider.addressList[index].city ?? ""}'),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('City: ${profileProvider.addressList[index].city ?? ""}, Zip: ${profileProvider.addressList[index].zip ?? ""}'),
+                            Text('Country: ${profileProvider.addressList[index].country ?? ""}'),
+                          ],
+                        ),
                         trailing: IconButton(
                           icon: Icon(Icons.delete_forever, color: Colors.red),
                           onPressed: () {

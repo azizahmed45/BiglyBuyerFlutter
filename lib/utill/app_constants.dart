@@ -39,7 +39,7 @@ class AppConstants {
   static const String CUSTOMER_URI = 'api/buyer/profile';
   static const String ADDRESS_LIST_URI = 'api/buyer/address/list';
   static const String REMOVE_ADDRESS_URI =
-      'api/v1/customer/address?address_id=';
+      'api/buyer/address/';
   static const String ADD_ADDRESS_URI = 'api/buyer/address/add';
   static const String WISH_LIST_GET_URI = 'api/v1/customer/wish-list';
   static const String SUPPORT_TICKET_URI =
