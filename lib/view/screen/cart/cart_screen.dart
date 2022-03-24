@@ -220,9 +220,9 @@ class _CartScreenState extends State<CartScreen> {
                                   if (Provider.of<AuthProvider>(context,
                                           listen: false)
                                       .isLoggedIn()) {
-                                    await Provider.of<CartProvider>(context,
-                                            listen: false)
-                                        .getCartDataAPI(context);
+                                    // await Provider.of<CartProvider>(context,
+                                    //         listen: false)
+                                    //     .getCartDataAPI(context);
                                   }
                                 },
                                 child: ListView.builder(

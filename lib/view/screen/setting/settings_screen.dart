@@ -46,11 +46,12 @@ class SettingsScreen extends StatelessWidget {
               title: getTranslated('choose_language', context),
               onTap: () => showAnimatedDialog(context, CurrencyDialog(isCurrency: false)),
             ),
-            TitleButton(
-              image: Images.currency,
-              title: '${getTranslated('currency', context)} (${Provider.of<SplashProvider>(context).myCurrency.name})',
-              onTap: () => showAnimatedDialog(context, CurrencyDialog()),
-            ),
+            // TitleButton(
+            //   image: Images.currency,
+            //   // title: '${getTranslated('currency', context)} (${Provider.of<SplashProvider>(context).myCurrency.name})',
+            //   title: 'USD',
+            //   onTap: () => showAnimatedDialog(context, CurrencyDialog()),
+            // ),
             /*TitleButton(
                 image: Images.preference,
                 title: Strings.preference,

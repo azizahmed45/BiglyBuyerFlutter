@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:bigly24/utill/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:bigly24/data/model/body/review_body.dart';
 import 'package:bigly24/data/model/response/base/api_response.dart';
@@ -45,18 +46,18 @@ class ProductDetailsProvider extends ChangeNotifier {
   void initProduct(Product product, BuildContext context) async {
     _hasConnection = true;
     _variantIndex = 0;
-    ApiResponse reviewResponse = await productDetailsRepo.getReviews(product.id.toString());
-    if (reviewResponse.response != null && reviewResponse.response.statusCode == 200) {
-      _reviewList = [];
-      reviewResponse.response.data.forEach((reviewModel) => _reviewList.add(ReviewModel.fromJson(reviewModel)));
-      _imageSliderIndex = 0;
-      _quantity = 1;
-    } else {
-      ApiChecker.checkApi(context, reviewResponse);
-      if(reviewResponse.error.toString() == 'Connection to API server failed due to internet connection') {
-        _hasConnection = false;
-      }
-    }
+    // ApiResponse reviewResponse = await productDetailsRepo.getReviews(product.id.toString());
+    // if (reviewResponse.response != null && reviewResponse.response.statusCode == 200) {
+    //   _reviewList = [];
+    //   reviewResponse.response.data.forEach((reviewModel) => _reviewList.add(ReviewModel.fromJson(reviewModel)));
+    //   _imageSliderIndex = 0;
+    //   _quantity = 1;
+    // } else {
+    //   ApiChecker.checkApi(context, reviewResponse);
+    //   if(reviewResponse.error.toString() == 'Connection to API server failed due to internet connection') {
+    //     _hasConnection = false;
+    //   }
+    // }
     notifyListeners();
   }
 
@@ -73,23 +74,24 @@ class ProductDetailsProvider extends ChangeNotifier {
   }
 
   void getCount(String productID, BuildContext context) async {
-    ApiResponse apiResponse = await productDetailsRepo.getCount(productID);
-    if (apiResponse.response != null && apiResponse.response.statusCode == 200) {
-      _orderCount = apiResponse.response.data['order_count'];
-      _wishCount = apiResponse.response.data['wishlist_count'];
-    } else {
-      ApiChecker.checkApi(context, apiResponse);
-    }
-    notifyListeners();
+    // ApiResponse apiResponse = await productDetailsRepo.getCount(productID);
+    // if (apiResponse.response != null && apiResponse.response.statusCode == 200) {
+    //   _orderCount = apiResponse.response.data['order_count'];
+    //   _wishCount = apiResponse.response.data['wishlist_count'];
+    // } else {
+    //   ApiChecker.checkApi(context, apiResponse);
+    // }
+    // notifyListeners();
   }
 
   void getSharableLink(String productID, BuildContext context) async {
-    ApiResponse apiResponse = await productDetailsRepo.getSharableLink(productID);
-    if (apiResponse.response != null && apiResponse.response.statusCode == 200) {
-      _sharableLink = apiResponse.response.data;
-    } else {
-      ApiChecker.checkApi(context, apiResponse);
-    }
+    _sharableLink = '${AppConstants.BASE_URL}/${AppConstants.PRODUCT_URL}/$productID';
+    // ApiResponse apiResponse = await productDetailsRepo.getSharableLink(productID);
+    // if (apiResponse.response != null && apiResponse.response.statusCode == 200) {
+    //   _sharableLink = apiResponse.response.data;
+    // } else {
+    //   ApiChecker.checkApi(context, apiResponse);
+    // }
   }
 
   void setErrorText(String error) {

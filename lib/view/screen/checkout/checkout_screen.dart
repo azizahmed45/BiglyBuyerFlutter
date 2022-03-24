@@ -56,7 +56,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     Provider.of<ProfileProvider>(context, listen: false).initAddressList(context);
     Provider.of<ProfileProvider>(context, listen: false).initAddressTypeList(context);
     Provider.of<CouponProvider>(context, listen: false).removePrevCouponData();
-    Provider.of<CartProvider>(context, listen: false).getCartDataAPI(context);
+    // Provider.of<CartProvider>(context, listen: false).getCartDataAPI(context);
     Provider.of<CartProvider>(context, listen: false).getChosenShippingMethod(context);
 
 

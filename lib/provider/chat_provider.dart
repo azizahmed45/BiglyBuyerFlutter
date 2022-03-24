@@ -29,22 +29,26 @@ class ChatProvider extends ChangeNotifier {
   bool get isSearching => _isSearching;
 
   Future<void> initChatInfo(BuildContext context) async {
-    ApiResponse apiResponse = await chatRepo.getChatInfo();
-    if (apiResponse.response != null && apiResponse.response.statusCode == 200) {
-      _chatInfoModel = ChatInfoModel.fromJson(apiResponse.response.data);
+    // ApiResponse apiResponse = await chatRepo.getChatInfo();
+    // if (apiResponse.response != null && apiResponse.response.statusCode == 200) {
+    //   _chatInfoModel = ChatInfoModel.fromJson(apiResponse.response.data);
+    //   _uniqueShopList = [];
+    //   _uniqueShopAllList = [];
+    //   if(_chatInfoModel.uniqueShops != null) {
+    //     _chatInfoModel.uniqueShops.forEach((uniqueShop) {
+    //       _uniqueShopList.add(uniqueShop);
+    //       _uniqueShopAllList.add(uniqueShop);
+    //     });
+    //   }else {
+    //     _chatInfoModel = ChatInfoModel(uniqueShops: []);
+    //   }
+    // } else {
+    //   ApiChecker.checkApi(context, apiResponse);
+    // }
+
+    _chatInfoModel = ChatInfoModel(uniqueShops: []);
       _uniqueShopList = [];
       _uniqueShopAllList = [];
-      if(_chatInfoModel.uniqueShops != null) {
-        _chatInfoModel.uniqueShops.forEach((uniqueShop) {
-          _uniqueShopList.add(uniqueShop);
-          _uniqueShopAllList.add(uniqueShop);
-        });
-      }else {
-        _chatInfoModel = ChatInfoModel(uniqueShops: []);
-      }
-    } else {
-      ApiChecker.checkApi(context, apiResponse);
-    }
     notifyListeners();
   }
 

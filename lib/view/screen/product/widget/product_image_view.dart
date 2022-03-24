@@ -68,16 +68,16 @@ class ProductImageView extends StatelessWidget {
                   ),
                 ),
               ),
-              Positioned(
-                bottom: 20,
-                right: 20,
-                child: FavouriteButton(
-                  backgroundColor: ColorResources.getImageBg(context),
-                  favColor: ColorResources.getPrimary(context),
-                  isSelected: Provider.of<WishListProvider>(context,listen: false).isWish,
-                  productId: productModel.id,
-                ),
-              ),
+              // Positioned(
+              //   bottom: 20,
+              //   right: 20,
+              //   child: FavouriteButton(
+              //     backgroundColor: ColorResources.getImageBg(context),
+              //     favColor: ColorResources.getPrimary(context),
+              //     isSelected: Provider.of<WishListProvider>(context,listen: false).isWish,
+              //     productId: productModel.id,
+              //   ),
+              // ),
 
             ]),
           ),

@@ -79,13 +79,18 @@ class _HomePageState extends State<HomePage> {
 
     _loadData(context, false);
 
-    Provider.of<CartProvider>(context, listen: false).uploadToServer(context);
+    // Provider.of<CartProvider>(context, listen: false).uploadToServer(context);
 
-    if (Provider.of<AuthProvider>(context, listen: false).isLoggedIn()) {
-      Provider.of<CartProvider>(context, listen: false).getCartDataAPI(context);
-    } else {
-      Provider.of<CartProvider>(context, listen: false).getCartData();
-    }
+    // if (Provider.of<AuthProvider>(context, listen: false).isLoggedIn()) {
+    //   Provider.of<CartProvider>(context, listen: false).getCartDataAPI(context);
+    // } else {
+    //   Provider.of<CartProvider>(context, listen: false).getCartData();
+    // }
+
+
+    //always take cart data from local
+    Provider.of<CartProvider>(context, listen: false).getCartData();
+
   }
 
   @override

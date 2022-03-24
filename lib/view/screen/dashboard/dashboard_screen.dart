@@ -33,7 +33,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     _screens = [
       HomePage(),
     
-      InboxScreen(isBackButtonExist: false),
+      // InboxScreen(isBackButtonExist: false),
       OrderScreen(isBacButtonExist: false),
       NotificationScreen(isBacButtonExist: false),
       MoreScreen(),
@@ -63,7 +63,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           tabs: [
             FancyTabData(imagePath: Images.home_image, title: getTranslated('home', context)),
             //TODO: seller
-            FancyTabData(imagePath: Images.message_image, title: getTranslated('inbox', context)),
+            // FancyTabData(imagePath: Images.message_image, title: getTranslated('inbox', context)),
             FancyTabData(imagePath:Images.shopping_image, title: getTranslated('orders', context)),
             FancyTabData(imagePath: Images.notification, title: getTranslated('notification', context)),
             FancyTabData(imagePath: Images.more_image, title: getTranslated('more', context)),

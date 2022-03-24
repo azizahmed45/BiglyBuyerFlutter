@@ -50,7 +50,7 @@ class NotificationScreen extends StatelessWidget {
                         child: ListTile(
                           leading: ClipOval(child: FadeInImage.assetNetwork(
                             placeholder: Images.placeholder, height: 50, width: 50, fit: BoxFit.cover,
-                            image: '${Provider.of<SplashProvider>(context, listen: false).baseUrls.notificationImageUrl}/${notification.notificationList[index].image}',
+                            image: '${notification.notificationList[index].image}',
                             imageErrorBuilder: (c, o, s) => Image.asset(Images.placeholder, height: 50, width: 50, fit: BoxFit.cover),
                           )),
                           title: Text(notification.notificationList[index].title, style: titilliumRegular.copyWith(

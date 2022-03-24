@@ -49,7 +49,7 @@ class SplashProvider extends ChangeNotifier {
         maintenanceMode: false,
         staticUrls: StaticUrls(contactUs: 'https://bigly24.com/page/contact-us'),
         aboutUs: 'https://bigly24.com/page/about-us',
-        termsConditions: "https://bigly24.com/page/about-us");
+        termsConditions: "https://bigly24.com/page/about-us",);
 
     _packageInfo = await PackageInfo.fromPlatform();
 

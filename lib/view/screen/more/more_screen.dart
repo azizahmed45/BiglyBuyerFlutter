@@ -158,10 +158,10 @@ class MoreScreen extends StatelessWidget {
                   title: getTranslated('notification', context),
                   navigateTo: NotificationScreen()),
               //TODO: seller
-              TitleButton(
-                  image: Images.chats,
-                  title: getTranslated('chats', context),
-                  navigateTo: InboxScreen()),
+              // TitleButton(
+              //     image: Images.chats,
+              //     title: getTranslated('chats', context),
+              //     navigateTo: InboxScreen()),
               TitleButton(
                   image: Images.settings,
                   title: getTranslated('settings', context),

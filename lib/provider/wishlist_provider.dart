@@ -29,92 +29,92 @@ class WishListProvider extends ChangeNotifier {
   List<Product> get allWishList => _allWishList;
 
   void searchWishList(String query) async {
-    _wishList = [];
-    _searchText = query;
-
-    if (query.isNotEmpty) {
-      List<Product> products = _allWishList.where((product) {
-        return product.name.toLowerCase().contains(query.toLowerCase());
-      }).toList();
-      _wishList.addAll(products);
-    } else {
-      _wishList.addAll(_allWishList);
-    }
-    notifyListeners();
+    // _wishList = [];
+    // _searchText = query;
+    //
+    // if (query.isNotEmpty) {
+    //   List<Product> products = _allWishList.where((product) {
+    //     return product.name.toLowerCase().contains(query.toLowerCase());
+    //   }).toList();
+    //   _wishList.addAll(products);
+    // } else {
+    //   _wishList.addAll(_allWishList);
+    // }
+    // notifyListeners();
   }
 
   void addWishList(int productID, {Function feedbackMessage}) async {
-    ApiResponse apiResponse = await wishListRepo.addWishList(productID);
-    if (apiResponse.response != null && apiResponse.response.statusCode == 200) {
-      Map map = apiResponse.response.data;
-      String message = map['message'];
-      feedbackMessage(message);
-      _wish = true;
-    } else {
-      _wish = false;
-      feedbackMessage('${apiResponse.error.toString()}');
-      print('${apiResponse.error.toString()}');
-    }
-    notifyListeners();
+    // ApiResponse apiResponse = await wishListRepo.addWishList(productID);
+    // if (apiResponse.response != null && apiResponse.response.statusCode == 200) {
+    //   Map map = apiResponse.response.data;
+    //   String message = map['message'];
+    //   feedbackMessage(message);
+    //   _wish = true;
+    // } else {
+    //   _wish = false;
+    //   feedbackMessage('${apiResponse.error.toString()}');
+    //   print('${apiResponse.error.toString()}');
+    // }
+    // notifyListeners();
   }
 
   void removeWishList(int productID, {int index, Function feedbackMessage}) async {
-    ApiResponse apiResponse = await wishListRepo.removeWishList(productID);
-    if (apiResponse.response != null && apiResponse.response.statusCode == 200) {
-      Map map = apiResponse.response.data;
-      String message = map['message'];
-      if(feedbackMessage != null) {
-        feedbackMessage(message);
-      }
-      if (index != null) {
-        _wishList.removeAt(index);
-        _allWishList.removeAt(index);
-      }
-    } else {
-      print('${apiResponse.error.toString()}');
-      feedbackMessage('${apiResponse.error.toString()}');
-    }
-    _wish = false;
-    notifyListeners();
+    // ApiResponse apiResponse = await wishListRepo.removeWishList(productID);
+    // if (apiResponse.response != null && apiResponse.response.statusCode == 200) {
+    //   Map map = apiResponse.response.data;
+    //   String message = map['message'];
+    //   if(feedbackMessage != null) {
+    //     feedbackMessage(message);
+    //   }
+    //   if (index != null) {
+    //     _wishList.removeAt(index);
+    //     _allWishList.removeAt(index);
+    //   }
+    // } else {
+    //   print('${apiResponse.error.toString()}');
+    //   feedbackMessage('${apiResponse.error.toString()}');
+    // }
+    // _wish = false;
+    // notifyListeners();
   }
 
   Future<void> initWishList(BuildContext context, String languageCode) async {
-    ApiResponse apiResponse = await wishListRepo.getWishList();
-    if (apiResponse.response != null && apiResponse.response.statusCode == 200) {
-      _wishList = [];
-      _allWishList = [];
-      notifyListeners();
-      apiResponse.response.data.forEach((wishList) async {
-        ApiResponse productResponse = await productDetailsRepo.getProduct(
-          WishListModel.fromJson(wishList).productId.toString(), languageCode,
-        );
-        if (productResponse.response != null && productResponse.response.statusCode == 200) {
-          Product _product = Product.fromJson(productResponse.response.data);
-          _wishList.add(_product);
-          _allWishList.add(_product);
-        } else {
-          ApiChecker.checkApi(context, productResponse);
-        }
-        notifyListeners();
-      });
-
-    } else {
-      ApiChecker.checkApi(context, apiResponse);
-    }
+    // ApiResponse apiResponse = await wishListRepo.getWishList();
+    // if (apiResponse.response != null && apiResponse.response.statusCode == 200) {
+    //   _wishList = [];
+    //   _allWishList = [];
+    //   notifyListeners();
+    //   apiResponse.response.data.forEach((wishList) async {
+    //     ApiResponse productResponse = await productDetailsRepo.getProduct(
+    //       WishListModel.fromJson(wishList).productId.toString(), languageCode,
+    //     );
+    //     if (productResponse.response != null && productResponse.response.statusCode == 200) {
+    //       Product _product = Product.fromJson(productResponse.response.data);
+    //       _wishList.add(_product);
+    //       _allWishList.add(_product);
+    //     } else {
+    //       ApiChecker.checkApi(context, productResponse);
+    //     }
+    //     notifyListeners();
+    //   });
+    //
+    // } else {
+    //   ApiChecker.checkApi(context, apiResponse);
+    // }
   }
 
   void checkWishList(String productId, BuildContext context) async {
-    ApiResponse apiResponse = await wishListRepo.getWishList();
-    List<String> productIdList = [];
-    if (apiResponse.response != null && apiResponse.response.statusCode == 200) {
-      apiResponse.response.data.forEach((wishList) async {
-        WishListModel wishListModel = WishListModel.fromJson(wishList);
-        productIdList.add(wishListModel.productId.toString());
-      });
-      productIdList.contains(productId) ? _wish = true : _wish = false;
-    } else {
-      ApiChecker.checkApi(context, apiResponse);
-    }
-    notifyListeners();
+  //   ApiResponse apiResponse = await wishListRepo.getWishList();
+  //   List<String> productIdList = [];
+  //   if (apiResponse.response != null && apiResponse.response.statusCode == 200) {
+  //     apiResponse.response.data.forEach((wishList) async {
+  //       WishListModel wishListModel = WishListModel.fromJson(wishList);
+  //       productIdList.add(wishListModel.productId.toString());
+  //     });
+  //     productIdList.contains(productId) ? _wish = true : _wish = false;
+  //   } else {
+  //     ApiChecker.checkApi(context, apiResponse);
+  //   }
+  //   notifyListeners();
   }
 }

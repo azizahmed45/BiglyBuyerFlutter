@@ -26,6 +26,7 @@ class AppConstants {
       'api/v1/products/home-categories';
 
   static const String PRODUCTS_URL = 'api/products';
+  static const String PRODUCT_URL = 'product';
 
   static const String PRODUCT_DETAILS_URI = 'api/v1/products/details/';
   static const String PRODUCT_REVIEW_URI = 'api/v1/products/reviews/';
@@ -78,7 +79,7 @@ class AppConstants {
   static const String CHAT_INFO_URI = 'api/v1/customer/chat';
   static const String SEND_MESSAGE_URI = 'api/v1/customer/chat/send-message';
   static const String TOKEN_URI = 'api/v1/customer/cm-firebase-token';
-  static const String NOTIFICATION_URI = 'api/v1/notifications';
+  static const String NOTIFICATION_URI = 'api/notifications';
   static const String GET_CART_DATA_URI = 'api/v1/cart';
   static const String ADD_TO_CART_URI = 'api/v1/cart/add';
   static const String UPDATE_CART_QUANTITY_URI = 'api/v1/cart/update';
@@ -133,8 +134,8 @@ class AppConstants {
         languageCode: 'en'),
     LanguageModel(
         imageUrl: '',
-        languageName: 'Arabic',
-        countryCode: 'SA',
-        languageCode: 'ar'),
+        languageName: 'Nepali',
+        countryCode: 'NP',
+        languageCode: 'ne'),
   ];
 }
