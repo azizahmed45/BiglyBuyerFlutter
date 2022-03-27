@@ -114,13 +114,17 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       double couponDiscount = Provider.of<CouponProvider>(context, listen: false).discount != null ? Provider.of<CouponProvider>(context, listen: false).discount : 0;
                       String couponCode = Provider.of<CouponProvider>(context, listen: false).discount != null ? Provider.of<CouponProvider>(context, listen: false).coupon.code : '';
                       if(Provider.of<OrderProvider>(context, listen: false).paymentMethodIndex == 0) {
-                        Provider.of<OrderProvider>(context, listen: false).placeOrder(OrderPlaceModel(
+
+                        OrderPlaceModel orderPlaceModel = OrderPlaceModel(
                           CustomerInfo(
                             Provider.of<ProfileProvider>(context, listen: false).addressList[Provider.of<OrderProvider>(context, listen: false).addressIndex].id.toString(),
                             Provider.of<ProfileProvider>(context, listen: false).addressList[Provider.of<OrderProvider>(context, listen: false).addressIndex].address,
                           ),
                           _cartList, order.paymentMethodIndex == 0 ? 'cash_on_delivery' : '', couponDiscount,
-                        ), _callback, _cartList, Provider.of<ProfileProvider>(context, listen: false).addressList[Provider.of<OrderProvider>(context, listen: false).addressIndex].id.toString(), couponCode);
+                        );
+
+                        Provider.of<OrderProvider>(context, listen: false).placeOrder(orderPlaceModel, _callback);
+
                       }else {
                         String userID = await Provider.of<ProfileProvider>(context, listen: false).getUserInfo(context);
                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => PaymentScreen(

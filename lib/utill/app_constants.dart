@@ -53,7 +53,7 @@ class AppConstants {
   static const String ORDER_URI = 'api/v1/customer/order/list';
   static const String ORDER_DETAILS_URI =
       'api/v1/customer/order/details?order_id=';
-  static const String ORDER_PLACE_URI = 'api/v1/customer/order/place';
+  static const String ORDER_PLACE_URI = 'api/buyer/order/place';
   static const String SELLER_URI = 'api/v1/seller?seller_id=';
   static const String SELLER_PRODUCT_URI = 'api/v1/seller/';
   static const String TOP_SELLER = 'api/v1/seller/top';

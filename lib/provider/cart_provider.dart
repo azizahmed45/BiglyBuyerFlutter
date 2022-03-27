@@ -356,17 +356,17 @@ class CartProvider extends ChangeNotifier {
   }
 
   Future<void> getChosenShippingMethod(BuildContext context) async {
-    ApiResponse apiResponse = await cartRepo.getChosenShippingMethod();
-    if (apiResponse.response != null &&
-        apiResponse.response.statusCode == 200) {
-      _chosenShippingList = [];
-      apiResponse.response.data.forEach((shipping) => _chosenShippingList
-          .add(ChosenShippingMethodModel.fromJson(shipping)));
-      notifyListeners();
-    } else {
-      ApiChecker.checkApi(context, apiResponse);
-    }
-    notifyListeners();
+    // ApiResponse apiResponse = await cartRepo.getChosenShippingMethod();
+    // if (apiResponse.response != null &&
+    //     apiResponse.response.statusCode == 200) {
+    //   _chosenShippingList = [];
+    //   apiResponse.response.data.forEach((shipping) => _chosenShippingList
+    //       .add(ChosenShippingMethodModel.fromJson(shipping)));
+    //   notifyListeners();
+    // } else {
+    //   ApiChecker.checkApi(context, apiResponse);
+    // }
+    // notifyListeners();
   }
 
   void setSelectedShippingMethod(int index, int sellerIndex) {

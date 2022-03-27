@@ -80,15 +80,15 @@ class OrderProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> placeOrder(OrderPlaceModel orderPlaceModel, Function callback, List<CartModel> cartList, String addressID, String couponCode) async {
+  Future<void> placeOrder(OrderPlaceModel orderPlaceModel, Function callback) async {
     _isLoading = true;
     notifyListeners();
-    ApiResponse apiResponse = await orderRepo.placeOrder(addressID, couponCode);
+    ApiResponse apiResponse = await orderRepo.placeOrder(orderPlaceModel);
     _isLoading = false;
     if (apiResponse.response != null && apiResponse.response.statusCode == 200) {
       _addressIndex = null;
       String message = apiResponse.response.data.toString();
-      callback(true, message, '', cartList);
+      callback(true, message, '', orderPlaceModel.cart);
     } else {
       String errorMessage;
       if (apiResponse.error is String) {
@@ -99,7 +99,7 @@ class OrderProvider with ChangeNotifier {
         print(errorResponse.errors[0].message);
         errorMessage = errorResponse.errors[0].message;
       }
-      callback(false, errorMessage, '-1', cartList);
+      callback(false, errorMessage, '-1', orderPlaceModel.cart);
     }
     notifyListeners();
   }

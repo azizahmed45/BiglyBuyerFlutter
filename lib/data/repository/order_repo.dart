@@ -1,3 +1,4 @@
+import 'package:bigly24/data/model/body/order_place_model.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:bigly24/data/datasource/remote/dio/dio_client.dart';
@@ -40,9 +41,13 @@ class OrderRepo {
   }
 
 
-  Future<ApiResponse> placeOrder(String addressID, String couponCode) async {
+  Future<ApiResponse> placeOrder(OrderPlaceModel orderPlaceModel) async {
     try {
-      final response = await dioClient.get(AppConstants.ORDER_PLACE_URI+'?address_id=$addressID&coupon_code=$couponCode');
+      // final response = await dioClient.get(AppConstants.ORDER_PLACE_URI+'?address_id=$addressID&coupon_code=$couponCode');
+      final response = await dioClient.post(
+          AppConstants.ORDER_PLACE_URI,
+          data: orderPlaceModel.toJson()
+      );
       return ApiResponse.withSuccess(response);
     } catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
