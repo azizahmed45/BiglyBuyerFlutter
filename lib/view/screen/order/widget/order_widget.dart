@@ -56,7 +56,7 @@ class OrderWidget extends StatelessWidget {
               color: ColorResources.getLowGreen(context),
               borderRadius: BorderRadius.circular(5),
             ),
-            child: Text(orderModel.orderStatus.toUpperCase(), style: titilliumSemiBold),
+            child: Text(orderModel.orderStatus.name.toUpperCase(), style: titilliumSemiBold),
           ),
 
         ]),

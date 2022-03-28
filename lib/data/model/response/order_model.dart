@@ -3,11 +3,11 @@ class OrderModel {
   int _customerId;
   String _customerType;
   String _paymentStatus;
-  String _orderStatus;
+  OrderStatus _orderStatus;
   String _paymentMethod;
   String _transactionRef;
   double _orderAmount;
-  int _shippingAddress;
+  String _shippingAddress;
   int _sellerId;
   int _shippingMethodId;
   double _shippingCost;
@@ -21,11 +21,11 @@ class OrderModel {
         int customerId,
         String customerType,
         String paymentStatus,
-        String orderStatus,
+        OrderStatus orderStatus,
         String paymentMethod,
         String transactionRef,
         double orderAmount,
-        int shippingAddress,
+        String shippingAddress,
         int sellerId,
         int shippingMethodId,
         double shippingCost,
@@ -55,11 +55,11 @@ class OrderModel {
   int get customerId => _customerId;
   String get customerType => _customerType;
   String get paymentStatus => _paymentStatus;
-  String get orderStatus => _orderStatus;
+  OrderStatus get orderStatus => _orderStatus;
   String get paymentMethod => _paymentMethod;
   String get transactionRef => _transactionRef;
   double get orderAmount => _orderAmount;
-  int get shippingAddress => _shippingAddress;
+  String get shippingAddress => _shippingAddress;
   int get shippingMethodId => _shippingMethodId;
   int get sellerId => _sellerId;
   double get shippingCost => _shippingCost;
@@ -73,17 +73,17 @@ class OrderModel {
     _customerId = json['customer_id'];
     _customerType = json['customer_type'];
     _paymentStatus = json['payment_status'];
-    _orderStatus = json['order_status'];
+    _orderStatus = OrderStatus.fromJson(json['order_status']);
     _paymentMethod = json['payment_method'];
     _transactionRef = json['transaction_ref'];
     _orderAmount = json['order_amount'].toDouble();
     _shippingAddress = json['shipping_address'];
     _sellerId = json['seller_id'];
     _shippingMethodId = json['shipping_method_id'];
-    _shippingCost = json['shipping_cost'].toDouble();
+    _shippingCost = json['shipping_cost']?.toDouble();
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
-    _discountAmount = json['discount_amount'].toDouble();
+    _discountAmount = json['discount_amount']?.toDouble();
     _discountType = json['discount_type'];
   }
 
@@ -105,6 +105,45 @@ class OrderModel {
     data['updated_at'] = this._updatedAt;
     data['discount_amount'] = this._discountAmount;
     data['discount_type'] = this._discountType;
+    return data;
+  }
+}
+
+
+class OrderStatus {
+  int _id;
+  int _position;
+  String _name;
+  String _displayName;
+  String _description;
+  String _color;
+
+  OrderStatus({int id, int position, String name, String displayName, String description, String color});
+
+  int get id => _id;
+  int get position => _position;
+  String get name => _name;
+  String get displayName => _displayName;
+  String get description => _description;
+  String get color => _color;
+
+  OrderStatus.fromJson(Map<String, dynamic> json) {
+    _id = json['id'];
+    _position = json['position'];
+    _name = json['name'];
+    _displayName = json['display_name'];
+    _description = json['description'];
+    _color = json['color'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this._id;
+    data['position'] = this._position;
+    data['name'] = this._name;
+    data['display_name'] = this._displayName;
+    data['description'] = this._description;
+    data['color'] = this._color;
     return data;
   }
 }

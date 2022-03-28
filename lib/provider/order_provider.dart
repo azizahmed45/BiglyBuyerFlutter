@@ -40,13 +40,13 @@ class OrderProvider with ChangeNotifier {
       _canceledList = [];
       apiResponse.response.data.forEach((order) {
         OrderModel orderModel = OrderModel.fromJson(order);
-        if (orderModel.orderStatus == AppConstants.PENDING || orderModel.orderStatus == AppConstants.CONFIRMED || orderModel.orderStatus ==AppConstants.OUT_FOR_DELIVERY
-            || orderModel.orderStatus == AppConstants.PROCESSING || orderModel.orderStatus == AppConstants.PROCESSED) {
+        if (orderModel.orderStatus.name == AppConstants.PENDING || orderModel.orderStatus.name == AppConstants.CONFIRMED || orderModel.orderStatus.name ==AppConstants.OUT_FOR_DELIVERY
+            || orderModel.orderStatus.name == AppConstants.PROCESSING || orderModel.orderStatus.name == AppConstants.PROCESSED) {
           _pendingList.add(orderModel);
-        } else if (orderModel.orderStatus == AppConstants.DELIVERED) {
+        } else if (orderModel.orderStatus.name == AppConstants.DELIVERED) {
           _deliveredList.add(orderModel);
-        } else if (orderModel.orderStatus == AppConstants.CANCELLED || orderModel.orderStatus == AppConstants.FAILED
-            || orderModel.orderStatus == AppConstants.RETURNED) {
+        } else if (orderModel.orderStatus.name == AppConstants.CANCELLED || orderModel.orderStatus.name == AppConstants.FAILED
+            || orderModel.orderStatus.name == AppConstants.RETURNED) {
           _canceledList.add(orderModel);
         }
       });

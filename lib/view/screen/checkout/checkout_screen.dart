@@ -354,7 +354,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     if(isSuccess) {
 
       //jaman baba
-      // Provider.of<CartProvider>(context, listen: false).removeCheckoutProduct(carts);
+      Provider.of<CartProvider>(context, listen: false).removeCheckoutProduct(carts);
       Provider.of<ProductProvider>(context, listen: false).getLatestProductList(
         '1', context, Provider.of<LocalizationProvider>(context, listen: false).locale.languageCode, reload: true,
       );
